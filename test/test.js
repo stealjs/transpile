@@ -1,6 +1,5 @@
 var es62cjs = 		require("../lib/es6_cjs"),
 	cjs2steal = 	require("../lib/cjs_steal"),
-	cjs2global = 	require("../lib/cjs_global"),
 	amd2cjs = 		require("../lib/amd_cjs"),
 	fs = require("fs"),
 	assert = require("assert");
@@ -38,26 +37,8 @@ describe('cjs - steal', function(){
     });
 });
 
-
-
-/*	
-fs.readFile(__dirname+"/es6_module.js", function(err, data){
-	var res = es62cjs({source: ""+data, address: __dirname+"/es6_module.js"});
-	
-	console.log("\n\n",res)
-	
-	res = cjs2steal({source: res})
-	console.log("\n\n",res)
-});*/
-
-/*
-fs.readFile(__dirname+"/cjs_module.js", function(err, data){
-	cjs2global({source: ""+data, address: __dirname+"/cjs_module.js"});
-
+describe('amd - cjs', function(){
+    it('should work', function(done){
+		convert("amd.js",amd2cjs,"amd_cjs.js", done)
+    });
 });
-*/
-/*
-fs.readFile(__dirname+"/amd_module.js", function(err, data){
-	var res = amd2cjs({source: ""+data, address: __dirname+"/amd_module.js"});
-	console.log(res);
-});*/
