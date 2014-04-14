@@ -1,6 +1,6 @@
 {
   "name" : "transpile",
-  "description" : "Gets JavaScript.",
+  "description" : "Transpiles JavaScript modules from one format to another.",
   "version" : "0.1.0",
   "author" : {
     "name" : "Bitovi",
