@@ -2,6 +2,7 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	cjs2steal = 	require("../lib/cjs_steal"),
 	amd2cjs = 		require("../lib/amd_cjs"),
 	steal2amd =		require("../lib/steal_amd"),
+	global2amd =		require("../lib/global_amd"),
 	fs = require("fs"),
 	assert = require("assert"),
 	transpile = require("../main");
@@ -72,8 +73,16 @@ describe('steal - amd', function(){
     it('should work', function(done){
 		convert("steal",steal2amd,"steal_amd.js", done)
     });
+    it('should leave nested steals alone', function(done){
+		convert("nested_steal",steal2amd,"nested_steal_amd.js", done)
+    });
 });
 
+describe('global - amd', function(){
+    it('should work', function(done){
+		convert("global",global2amd,"global_amd.js", done)
+    });
+});
 
 describe("transpile", function(){
 	

@@ -1,0 +1,1 @@
+System.define('global','var GLOBAL = \"I don\'t like \\\"Quotes\\\"\";');
