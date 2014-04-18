@@ -1,6 +1,6 @@
 
 
-var edges = ["amd_cjs","cjs_amd","cjs_steal","es6_cjs","steal_amd"];
+var edges = ["amd_cjs","cjs_amd","cjs_steal","es6_cjs","steal_amd","amd_amd"];
 
 var graph = {},
 	transpilers = {};
@@ -29,6 +29,11 @@ var copyLoad = function(load){
 	}
 	return copy;
 };
+
+var toSelf = function(load){
+	return load.source;
+};
+
 // transpile.to
 var transpile = {
 	transpilers: transpilers,
@@ -40,13 +45,17 @@ var transpile = {
 		if(!path) {
 			throw "transpile - unable to transpile "+format+" to "+type;
 		}
+		if(!path.length) {
+			// we are transpiling to ourselves.  Check for a transpiler
+			path.push(format);
+		}
+		
 		path.push(type);
 		var copy = copyLoad(load);
 		
 		for(var i =0; i < path.length - 1; i++) {
-			var transpiler = transpilers[path[i]+"_"+path[i+1]];	
+			var transpiler = transpilers[path[i]+"_"+path[i+1]] || toSelf;	
 			copy.source = transpiler(copy);
-			
 		}
 		return copy.source;
 	},

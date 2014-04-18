@@ -2,7 +2,8 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	cjs2steal = 	require("../lib/cjs_steal"),
 	amd2cjs = 		require("../lib/amd_cjs"),
 	steal2amd =		require("../lib/steal_amd"),
-	global2amd =		require("../lib/global_amd"),
+	global2amd =	require("../lib/global_amd"),
+	amd2amd = 		require("../lib/amd_amd"),
 	fs = require("fs"),
 	assert = require("assert"),
 	transpile = require("../main");
@@ -101,4 +102,15 @@ describe("transpile", function(){
 		doTranspile("steal","steal","steal_cjs.js","cjs", done);
     });
 
+});
+
+
+describe('amd - amd', function(){
+	it('should work', function(done){
+		convert("amd",amd2amd,"amd_amd.js", done)
+    });
+    
+    it.only("works with transpile", function(done){
+    	doTranspile("amd","amd","amd_amd.js","amd", done);
+    });
 });
