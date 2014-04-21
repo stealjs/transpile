@@ -110,7 +110,7 @@ describe('amd - amd', function(){
 		convert("amd",amd2amd,"amd_amd.js", done)
     });
     
-    it.only("works with transpile", function(done){
+    it("works with transpile", function(done){
     	doTranspile("amd","amd","amd_amd.js","amd", done);
     });
 });
