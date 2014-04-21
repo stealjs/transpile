@@ -33,14 +33,15 @@ var copyLoad = function(load){
 var toSelf = function(load){
 	return load.source;
 };
+var moduleType = require('js-module-formats').detect;
 
 // transpile.to
 var transpile = {
 	transpilers: transpilers,
 	// transpile.to("amd",load)
 	to: function(load, type){
-		var format = load.metadata.format || "es6";
-		var path = this.able(load.metadata.format || "es6", type);
+		var format = load.metadata.format || moduleType(load.source) || "es6";
+		var path = this.able(format, type);
 		
 		if(!path) {
 			throw "transpile - unable to transpile "+format+" to "+type;

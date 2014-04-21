@@ -114,3 +114,9 @@ describe('amd - amd', function(){
     	doTranspile("amd","amd","amd_amd.js","amd", done);
     });
 });
+
+describe('amd input format module detection', function(){
+	it("works with transpile", function(done){
+    	doTranspile("amd",undefined,"amd_amd.js","amd", done);
+    });
+});
