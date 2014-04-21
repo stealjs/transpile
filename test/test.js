@@ -115,8 +115,11 @@ describe('amd - amd', function(){
     });
 });
 
-describe('amd input format module detection', function(){
-	it("works with transpile", function(done){
+describe('metadata.format', function(){
+	it("should be detected from amd source", function(done){
     	doTranspile("amd",undefined,"amd_amd.js","amd", done);
+    });
+	it("should be detected from steal source", function(done){
+    	doTranspile("steal",undefined,"steal_cjs.js","cjs", done);
     });
 });
