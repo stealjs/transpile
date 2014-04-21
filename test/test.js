@@ -122,4 +122,7 @@ describe('metadata.format', function(){
 	it("should be detected from steal source", function(done){
     	doTranspile("steal",undefined,"steal_cjs.js","cjs", done);
     });
+    it('should be detected from es6 source', function(done){
+		doTranspile("es6",undefined,"es6_cjs.js", "cjs", done);
+    });
 });
