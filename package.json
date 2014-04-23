@@ -16,6 +16,15 @@
     "estraverse" : "1.5.0",
     "js-string-escape": "1.0.0"
   },
+  "devDependencies": {
+    "chai": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "xunit-file": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
+  },
   "licenses" : [
     {
       "type" : "MIT",
