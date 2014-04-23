@@ -99,7 +99,7 @@ describe("transpile", function(){
     
     it('able to es6 to amd', function(){
 		var res = transpile.able("es6","amd");
-		assert.deepEqual(res,["es6","cjs"]);
+		assert.deepEqual(res,["es6"]);
     });
 
 	it('to steal to cjs', function(done){

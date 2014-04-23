@@ -1,6 +1,13 @@
 
 
-var edges = ["amd_cjs","cjs_amd","cjs_steal","es6_cjs","steal_amd","amd_amd"];
+var edges = [
+	"amd_cjs",
+	"cjs_amd",
+	"cjs_steal",
+	"es6_amd",
+	"es6_cjs",
+	"steal_amd",
+	"amd_amd"];
 
 var graph = {},
 	transpilers = {};
@@ -58,6 +65,7 @@ var transpile = {
 		}
 		
 		path.push(type);
+		
 		var copy = copyLoad(load);
 		
 		for(var i =0; i < path.length - 1; i++) {
@@ -71,6 +79,7 @@ var transpile = {
 		bfs(from || "es6", graph, function(cur){
 			if(cur.node === to) {
 				path = cur.path;
+				return false;
 			}
 		});
 		return path;
