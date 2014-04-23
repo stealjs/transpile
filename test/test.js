@@ -96,6 +96,11 @@ describe("transpile", function(){
 		var res = transpile.able("steal","amd");
 		assert.deepEqual(res,["steal"]);
     });
+    
+    it('able to es6 to amd', function(){
+		var res = transpile.able("es6","amd");
+		assert.deepEqual(res,["es6","cjs"]);
+    });
 
 	it('to steal to cjs', function(done){
 		
@@ -111,18 +116,26 @@ describe('amd - amd', function(){
     });
     
     it("works with transpile", function(done){
-    	doTranspile("amd","amd","amd_amd.js","amd", done);
+		doTranspile("amd","amd","amd_amd.js","amd", done);
     });
 });
 
 describe('metadata.format', function(){
 	it("should be detected from amd source", function(done){
-    	doTranspile("amd",undefined,"amd_amd.js","amd", done);
+		doTranspile("amd",undefined,"amd_amd.js","amd", done);
     });
 	it("should be detected from steal source", function(done){
-    	doTranspile("steal",undefined,"steal_cjs.js","cjs", done);
+		doTranspile("steal",undefined,"steal_cjs.js","cjs", done);
     });
     it('should be detected from es6 source', function(done){
 		doTranspile("es6",undefined,"es6_cjs.js", "cjs", done);
     });
+});
+
+describe('es6 - amd', function(){
+	
+	
+	it("should work with bangs", function(done){
+		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd", done);
+	});
 });

@@ -12,9 +12,9 @@ edges.forEach(function(edge){
 		graph[types[0]] = {};
 	}
 	if(!graph[types[1]]) {
-		graph[types[0]] = {};
+		graph[types[1]] = {};
 	}
-	
+	// graph.amd.cjs = graph.cjs
 	graph[types[0]][types[1]] = graph[types[1]];
 	transpilers[edge] = require("./lib/"+edge)
 	
