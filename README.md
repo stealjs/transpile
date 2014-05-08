@@ -48,7 +48,7 @@ var transpile = require('transpile');
 var res = transpile.to({
   name: "my/module",
   source: "var foo = require('foo')",
-  metdata: {format: "cjs"}
+  metadata: {format: "cjs"}
 }, "amd")
 
 res //-> "define("my/module", function(require, exports, module) { ... "
