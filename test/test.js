@@ -107,6 +107,9 @@ describe("transpile", function(){
 		doTranspile("steal","steal","steal_cjs.js","cjs", done);
     });
 
+	it('able to global to amd', function(done){
+		doTranspile("global","global","global_amd.js","amd", done);
+	});
 });
 
 
@@ -139,3 +142,5 @@ describe('es6 - amd', function(){
 		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd", done);
 	});
 });
+
+

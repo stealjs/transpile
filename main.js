@@ -7,7 +7,8 @@ var edges = [
 	"es6_amd",
 	"es6_cjs",
 	"steal_amd",
-	"amd_amd"];
+	"amd_amd",
+	"global_amd"];
 
 var graph = {},
 	transpilers = {};
