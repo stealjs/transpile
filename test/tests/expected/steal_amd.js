@@ -1,6 +1,6 @@
 define('steal', [
-    'foo',
-    'bar'
+    'foo/foo',
+    'bar/bar'
 ], function (foo, bar) {
     return {
         foo: foo,
