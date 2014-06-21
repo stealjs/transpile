@@ -84,10 +84,4 @@ to "cjs".
 
 ## Test
 
-Install mocha globally:
-
-    > npm install -g mocha
-    
-Run:
-
-	> mocha
+    > npm test

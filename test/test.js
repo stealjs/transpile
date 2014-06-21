@@ -20,6 +20,7 @@ var convert = function(moduleName, converter, result, done){
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
 			}
+			//console.log(res)
 			assert.equal(""+res,""+resultData,"expected equals result");
 			done()
 		});

@@ -9,7 +9,7 @@
   },
   "dependencies" : {
   	"mocha": "1.18.2",
-    "traceur": "0.0.32",
+    "traceur": "0.0.41",
     "esprima": "1.1.1",
     "escodegen" :"1.3.2",
     "comparify" : "0.1.0",

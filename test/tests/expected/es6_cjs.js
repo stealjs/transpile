@@ -1,17 +1,16 @@
 "use strict";
-var __moduleName = "test/tests/es6";
-var amdMod = require('basics/amdmodule').default;
+Object.defineProperties(exports, {
+  default: {get: function() {
+      return $__default;
+    }},
+  __useDefault: {get: function() {
+      return __useDefault;
+    }},
+  __esModule: {value: true}
+});
+var amdMod = $traceurRuntime.assertObject(require('basics/amdmodule')).default;
 var $__default = {
   amdModule: amdMod,
   name: "es6Module"
 };
 var __useDefault = true;
-module.exports = {
-  get default() {
-    return $__default;
-  },
-  get __useDefault() {
-    return __useDefault;
-  },
-  __esModule: true
-};
