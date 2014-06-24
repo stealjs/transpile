@@ -1,1 +1,1 @@
-System.define('global','var GLOBAL = \"I don\'t like \\\"Quotes\\\"\";');
+System.define('global','var GLOBAL = \"I don\'t like \\\"Quotes\\\"\";',{"address":"global"});

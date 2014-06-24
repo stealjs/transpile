@@ -109,7 +109,7 @@ describe("transpile", function(){
     });
 
 	it('able to global to amd', function(done){
-		doTranspile("global","global","global_amd.js","amd", done);
+		doTranspile("global","global","global_amd_with_format.js","amd", done);
 	});
 });
 
