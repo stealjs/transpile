@@ -53,7 +53,7 @@ function moduleType(source) {
 var transpile = {
 	transpilers: transpilers,
 	// transpile.to("amd",load)
-	to: function(load, type){
+	to: function(load, type, options){
 		var format = load.metadata.format || moduleType(load.source);
 		var path = this.able(format, type);
 		
@@ -71,7 +71,7 @@ var transpile = {
 		
 		for(var i =0; i < path.length - 1; i++) {
 			var transpiler = transpilers[path[i]+"_"+path[i+1]] || toSelf;	
-			copy.source = transpiler(copy);
+			copy.source = transpiler(copy, options);
 		}
 		return copy.source;
 	},
