@@ -8,19 +8,23 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	assert = require("assert"),
 	transpile = require("../main");
 
-var convert = function(moduleName, converter, result, done){
+var convert = function(moduleName, converter, result, options, done){
+	if(typeof options === "function") {
+		done = options;
+		options = {};
+	}
+
 	fs.readFile(__dirname+"/tests/"+moduleName+".js", function(err, data){
 		if(err) {
 			assert.fail(err, null, "reading "+__dirname+"/tests/"+file+" failed");
 		}
-		var res = converter({source: ""+data, address: __dirname+"/tests/"+moduleName+".js", name: moduleName});
+		var res = converter({source: ""+data, address: __dirname+"/tests/"+moduleName+".js", name: moduleName}, options);
 		assert.ok(res, "got back a value");
 		
 		fs.readFile(__dirname+"/tests/expected/"+result, function(err, resultData){
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
 			}
-			//console.log(res)
 			assert.equal(""+res,""+resultData,"expected equals result");
 			done()
 		});
@@ -73,11 +77,19 @@ describe('amd - cjs', function(){
 
 describe('steal - amd', function(){
     it('should work', function(done){
-		convert("steal",steal2amd,"steal_amd.js", done)
+			convert("steal",steal2amd,"steal_amd.js", done)
     });
     it('should leave nested steals alone', function(done){
 		convert("nested_steal",steal2amd,"nested_steal_amd.js", done)
     });
+		it('should work with a dependencyMap', function(done){
+			var options = {
+				dependencyMap: {
+					'./baz': 'baz'
+				}
+			};
+			convert("steal_deps",steal2amd,"steal_amd_dep.js", options, done);
+		});
 });
 
 describe('global - amd', function(){
