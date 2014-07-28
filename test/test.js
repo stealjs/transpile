@@ -82,14 +82,29 @@ describe('steal - amd', function(){
     it('should leave nested steals alone', function(done){
 		convert("nested_steal",steal2amd,"nested_steal_amd.js", done)
     });
-		it('should work with a dependencyMap', function(done){
-			var options = {
-				dependencyMap: {
-					'./baz': 'baz'
+	it('should work with a normalizeMap', function(done){
+		var options = {
+			normalizeMap: {
+				'./baz': 'baz'
+			}
+		};
+		convert("steal_deps",steal2amd,"steal_amd_dep.js", options, done);
+	});
+	it('should work with a normalize option',function(done){
+		convert("steal_deps",steal2amd,"steal_amd_normalize.js", {
+			normalizeMap: {
+				'./baz': 'baz'
+			},
+			normalize: function(name){
+				var parts = name.split("/"),
+					len = parts.length;
+				if( parts[len-1] === parts[len-2] ) {
+					parts.pop();
 				}
-			};
-			convert("steal_deps",steal2amd,"steal_amd_dep.js", options, done);
-		});
+				return parts.join("/");
+			}
+		}, done);
+	});
 });
 
 describe('global - amd', function(){
@@ -155,5 +170,4 @@ describe('es6 - amd', function(){
 		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd", done);
 	});
 });
-
 

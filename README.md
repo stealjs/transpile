@@ -35,7 +35,7 @@ Formats are specified by strings like:
  - "steal" - steal syntax like `steal('jquery', function($){})`
 
 
-### `transpile.to(load, format) -> transpiledSource`
+### `transpile.to(load, format, options) -> transpiledSource`
 
 Transpiles from the `load`'s format to the specified format. If
 the `load` does not specify a format, `"es6"` modules are assumed. Returns
@@ -64,6 +64,14 @@ an [ES6 Load Record](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-l
   metadata: {format: "formatName"}
 }
 ```
+
+#### options
+
+ - __normalizeMap__ `Object<moduleName,moduleName>` - A mapping module names that will
+   be used to replace dependency names in the transpiled result.
+ - __normalize__ `function(name, currentName, address) -> String` - A function
+   that can be used to change moduleNames that are written in the transpiled result.
+
 
 ### `transpile.able(fromFormat, toFormat) -> transpiledPath`
 
