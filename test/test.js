@@ -4,6 +4,7 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	steal2amd =		require("../lib/steal_amd"),
 	global2amd =	require("../lib/global_amd"),
 	amd2amd = 		require("../lib/amd_amd"),
+	cjs2amd =			require("../lib/cjs_amd"),
 	fs = require("fs"),
 	assert = require("assert"),
 	transpile = require("../main");
@@ -171,3 +172,14 @@ describe('es6 - amd', function(){
 	});
 });
 
+describe('cjs - amd', function(){
+	it("should work with relative dependencies", function(done){
+		var options = {
+			normalizeMap: {
+				'./b': 'b'
+			}
+		};
+
+		convert("cjs_deps", cjs2amd, "cjs_deps.js", options, done);
+	});
+});
