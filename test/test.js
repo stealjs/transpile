@@ -57,7 +57,7 @@ var doTranspile = function(moduleName, format, result, resultFormat, done){
 
 describe('es6 - cjs', function(){
     it('should work', function(done){
-		convert("es6",es62cjs,"es6_cjs.js", done)
+			convert("es6",es62cjs,"es6_cjs.js", done)
     });
 });
 
