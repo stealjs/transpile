@@ -57,7 +57,7 @@ var doTranspile = function(moduleName, format, result, resultFormat, done){
 
 describe('es6 - cjs', function(){
     it('should work', function(done){
-		convert("es6",es62cjs,"es6_cjs.js", done)
+			convert("es6",es62cjs,"es6_cjs.js", done)
     });
 });
 
@@ -145,11 +145,20 @@ describe("transpile", function(){
 describe('amd - amd', function(){
 	it('should work', function(done){
 		convert("amd",amd2amd,"amd_amd.js", done)
-    });
+	});
     
-    it("works with transpile", function(done){
+	it("works with transpile", function(done){
 		doTranspile("amd","amd","amd_amd.js","amd", done);
-    });
+	});
+
+	it('should work with a normalizeMap', function(done){
+		var options = {
+			normalizeMap: {
+				'./baz': 'baz'
+			}
+		};
+		convert("amd_deps",amd2amd,"amd_deps.js", options, done);
+	});
 });
 
 describe('metadata.format', function(){
