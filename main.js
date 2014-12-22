@@ -1,19 +1,18 @@
-
-
-var edges = [
-	"amd_cjs",
-	"cjs_amd",
-	"cjs_steal",
-	"es6_amd",
-	"es6_cjs",
-	"steal_amd",
-	"amd_amd",
-	"global_amd"];
-
+var bfs = require("./lib/bfs");
+var detect = require('js-module-formats').detect;
 var graph = {},
-	transpilers = {};
+	transpilers = {
+		"amd_cjs": require("./lib/amd_cjs"),
+		"cjs_amd": require("./lib/cjs_amd"),
+		"cjs_steal": require("./lib/cjs_steal"),
+		"es6_amd": require("./lib/es6_amd"),
+		"es6_cjs": require("./lib/es6_cjs"),
+		"steal_amd": require("./lib/steal_amd"),
+		"amd_amd": require("./lib/amd_amd"),
+		"global_amd": require("./lib/global_amd")
+	};
 
-edges.forEach(function(edge){
+for(var edge in transpilers) {
 	var types = edge.split("_");
 	
 	if(!graph[types[0]]) {
@@ -22,13 +21,11 @@ edges.forEach(function(edge){
 	if(!graph[types[1]]) {
 		graph[types[1]] = {};
 	}
-	// graph.amd.cjs = graph.cjs
-	graph[types[0]][types[1]] = graph[types[1]];
-	transpilers[edge] = require("./lib/"+edge)
 	
-});
+	graph[types[0]][types[1]] = graph[types[1]];
+}
 
-var bfs = require("./lib/bfs");
+
 	
 var copyLoad = function(load){
 	var copy = {};
@@ -41,7 +38,7 @@ var copyLoad = function(load){
 var toSelf = function(load){
 	return load.source;
 };
-var detect = require('js-module-formats').detect;
+
 
 function moduleType(source) {
 	var type = detect(source);
