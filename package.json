@@ -8,7 +8,6 @@
     "web" : "http://bitovi.com/"
   },
   "dependencies" : {
-  	"mocha": "1.18.2",
     "traceur": "0.0.58",
     "esprima": "1.1.1",
     "escodegen" :"1.3.2",
@@ -20,11 +19,16 @@
   "devDependencies": {
     "chai": "*",
     "istanbul": "*",
-    "mocha": "*",
+    "mocha": "1.18.2",
     "xunit-file": "*"
   },
   "globalBrowser": {
-    "traceur@0.0.58#src/node/traceur.js": "./browser/traceur.js"
+    "traceur#src/node/traceur.js": "./browser/traceur.js"
+  },
+  "system": {
+    "meta": {
+      "traceur@0.0.58#bin/traceur": {"format": "global"}
+    }
   },
   "scripts": {
     "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
