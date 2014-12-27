@@ -10,8 +10,5 @@ if(!globalTraceur) {
 
 // traceur is a module and thus frozen.
 module.exports = {
-  __proto__: globalTraceur.traceur,
-  get require() {
-    return require('traceur/src/node/require.js');
-  }
+  __proto__: globalTraceur.traceur
 };
