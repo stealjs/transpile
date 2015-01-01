@@ -23,11 +23,11 @@
     "xunit-file": "*"
   },
   "globalBrowser": {
-    "traceur#src/node/traceur.js": "./browser/traceur.js"
+    "traceur#./src/node/traceur.js": "./browser/traceur.js"
   },
   "system": {
     "meta": {
-      "traceur@0.0.58#bin/traceur": {"format": "global"}
+      "traceur#./bin/traceur": {"format": "global"}
     }
   },
   "scripts": {
