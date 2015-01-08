@@ -91,29 +91,6 @@ describe('steal - amd', function(){
     it('should leave nested steals alone', function(done){
 		convert("nested_steal",steal2amd,"nested_steal_amd.js", done)
     });
-	it('should work with a normalizeMap', function(done){
-		var options = {
-			normalizeMap: {
-				'./baz': 'baz'
-			}
-		};
-		convert("steal_deps",steal2amd,"steal_amd_dep.js", options, done);
-	});
-	it('should work with a normalize option',function(done){
-		convert("steal_deps",steal2amd,"steal_amd_normalize.js", {
-			normalizeMap: {
-				'./baz': 'baz'
-			},
-			normalize: function(name){
-				var parts = name.split("/"),
-					len = parts.length;
-				if( parts[len-1] === parts[len-2] ) {
-					parts.pop();
-				}
-				return parts.join("/");
-			}
-		}, done);
-	});
 });
 
 describe('global - amd', function(){
@@ -201,5 +178,48 @@ describe('cjs - amd', function(){
 	});
 });
 
+describe('normalize options', function(){
+	it('steal - amd + normalizeMap', function(done){
+		var options = {
+			normalizeMap: {
+				'./baz': 'baz'
+			}
+		};
+		convert("steal_deps",steal2amd,"steal_amd_dep.js", options, done);
+	});
+	it('steal - amd + normalize',function(done){
+		convert("steal_deps",steal2amd,"steal_amd_normalize.js", {
+			normalizeMap: {
+				'./baz': 'baz'
+			},
+			normalize: function(name){
+				var parts = name.split("/"),
+					len = parts.length;
+				if( parts[len-1] === parts[len-2] ) {
+					parts.pop();
+				}
+				return parts.join("/");
+			}
+		}, done);
+	});
+	
+	it('es6 - cjs + normalize',function(done){
+		
+		convert("es_needing_normalize",es62cjs,"es_needing_normalize_cjs.js", {
+			normalize: function(name){
 
+				if(name.lastIndexOf("/") === name.length - 1) {
+					var parts = name.split("/");
+					parts[parts.length - 1] =  parts[parts.length - 2];
+					return parts.join("/");
+				} else if( name.indexOf("!") >= 0 ) {
+					return name.substr(0, name.indexOf("!") );
+				}
+				return name;
+			}
+		}, done);
+		
+	});
+	
+});
 
