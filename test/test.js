@@ -59,6 +59,11 @@ describe('es6 - cjs', function(){
     it('should work', function(done){
 			convert("es6",es62cjs,"es6_cjs.js", done)
     });
+    
+    it('works if global.System is something else (#14)', function(done){
+		global.System = {};
+		convert("es6",es62cjs,"es6_cjs.js", done);
+    });
 });
 
 describe('cjs - steal', function(){
@@ -192,3 +197,6 @@ describe('cjs - amd', function(){
 		convert("cjs_deps", cjs2amd, "cjs_deps.js", options, done);
 	});
 });
+
+
+
