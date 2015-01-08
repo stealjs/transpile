@@ -1,3 +1,6 @@
+// this loads traceur to make sure lib/clean_traceur_compile
+var traceur = require('traceur');
+
 var es62cjs = 		require("../lib/es6_cjs"),
 	cjs2steal = 	require("../lib/cjs_steal"),
 	amd2cjs = 		require("../lib/amd_cjs"),
