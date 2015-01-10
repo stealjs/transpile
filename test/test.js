@@ -124,6 +124,11 @@ describe("transpile", function(){
 	it('able to global to amd', function(done){
 		doTranspile("global","global","global_amd_with_format.js","amd", done);
 	});
+	
+	it('able to steal to cjs with missing args', function(done){
+		
+		doTranspile("steal_no_value_arg","steal","steal_no_value_arg_cjs.js","cjs",done);
+	});
 });
 
 
