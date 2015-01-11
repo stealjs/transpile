@@ -35,7 +35,11 @@ var convert = function(moduleName, converter, result, options, done){
 	});
 };
 
-var doTranspile = function(moduleName, format, result, resultFormat, done){
+var doTranspile = function(moduleName, format, result, resultFormat, options, done){
+	if(typeof options === "function") {
+		done = options;
+		options = {};
+	}
 	fs.readFile(__dirname+"/tests/"+moduleName+".js", function(err, data){
 		if(err) {
 			assert.fail(err, null, "reading "+__dirname+"/tests/"+file+" failed");
@@ -45,7 +49,7 @@ var doTranspile = function(moduleName, format, result, resultFormat, done){
 			address: __dirname+"/tests/"+moduleName+".js", 
 			name: moduleName, 
 			metadata: {format: format}
-		}, resultFormat);
+		}, resultFormat, options);
 		assert.ok(res, "got back a value");
 		
 		fs.readFile(__dirname+"/tests/expected/"+result, function(err, resultData){
@@ -134,18 +138,19 @@ describe("transpile", function(){
 
 describe('amd - amd', function(){
 	it('should work', function(done){
-		convert("amd",amd2amd,"amd_amd.js", done)
+		convert("amd",amd2amd,"amd_amd.js", {namedDefines: true},done)
 	});
     
 	it("works with transpile", function(done){
-		doTranspile("amd","amd","amd_amd.js","amd", done);
+		doTranspile("amd","amd","amd_amd.js","amd",{namedDefines: true}, done);
 	});
 
 	it('should work with a normalizeMap', function(done){
 		var options = {
 			normalizeMap: {
 				'./baz': 'baz'
-			}
+			},
+			namedDefines: true
 		};
 		convert("amd_deps",amd2amd,"amd_deps.js", options, done);
 	});
@@ -153,7 +158,7 @@ describe('amd - amd', function(){
 
 describe('metadata.format', function(){
 	it("should be detected from amd source", function(done){
-		doTranspile("amd",undefined,"amd_amd.js","amd", done);
+		doTranspile("amd",undefined,"amd_amd.js","amd", {namedDefines: true}, done);
     });
 	it("should be detected from steal source", function(done){
 		doTranspile("steal",undefined,"steal_cjs.js","cjs", done);
@@ -167,7 +172,7 @@ describe('es6 - amd', function(){
 	
 	
 	it("should work with bangs", function(done){
-		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd", done);
+		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd",{namedDefines: true},  done);
 	});
 });
 

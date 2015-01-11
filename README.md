@@ -71,7 +71,7 @@ an [ES6 Load Record](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-l
    be used to replace dependency names in the transpiled result.
  - __normalize__ `function(name, currentName, address) -> String` - A function
    that can be used to change moduleNames that are written in the transpiled result.
-
+ - __namedDefines__ `Boolean=false` - Set to true to insert named defines. 
 
 ### `transpile.able(fromFormat, toFormat) -> transpiledPath`
 
