@@ -249,5 +249,15 @@ describe('normalize options', function(){
 		
 	});
 	
+	it('steal - cjs + normalize',function(done){
+		
+		doTranspile("steal_needing_normalize","steal","steal_needing_normalize_cjs.js","cjs", {
+			normalize: function(name){
+				return name+"-normalized";
+			}
+		},done);
+		
+	});
+	
 });
 
