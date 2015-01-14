@@ -231,5 +231,23 @@ describe('normalize options', function(){
 		
 	});
 	
+	it('amd - cjs + normalize',function(done){
+		
+		convert("amd_needing_normalize",amd2cjs,"amd_needing_normalize_cjs.js", {
+			normalize: function(name){
+
+				if(name.lastIndexOf("/") === name.length - 1) {
+					var parts = name.split("/");
+					parts[parts.length - 1] =  parts[parts.length - 2];
+					return parts.join("/");
+				} else if( name.indexOf("!") >= 0 ) {
+					return name.substr(name.indexOf("!")+1);
+				}
+				return name;
+			}
+		}, done);
+		
+	});
+	
 });
 
