@@ -12,17 +12,29 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	assert = require("assert"),
 	transpile = require("../main");
 
-var convert = function(moduleName, converter, result, options, done){
+var extend = function(d, s) {
+	for(var prop in s) {
+		d[prop] = s[prop];
+	}
+	return d;
+};
+
+var convert = function(moduleName, converter, result, options, done, load){
 	if(typeof options === "function") {
+		load = done;
 		done = options;
 		options = {};
 	}
-
+	if(!load) {
+		load = {};
+	}
+	
 	fs.readFile(__dirname+"/tests/"+moduleName+".js", function(err, data){
 		if(err) {
 			assert.fail(err, null, "reading "+__dirname+"/tests/"+file+" failed");
 		}
-		var res = converter({source: ""+data, address: __dirname+"/tests/"+moduleName+".js", name: moduleName}, options);
+		load = extend({source: ""+data, address: __dirname+"/tests/"+moduleName+".js", name: moduleName}, load);
+		var res = converter(load, options);
 		assert.ok(res, "got back a value");
 		
 		fs.readFile(__dirname+"/tests/expected/"+result, function(err, resultData){
@@ -138,7 +150,7 @@ describe("transpile", function(){
 
 describe('amd - amd', function(){
 	it('should work', function(done){
-		convert("amd",amd2amd,"amd_amd.js", {namedDefines: true},done)
+		convert("amd",amd2amd,"amd_amd.js", {namedDefines: true},done);
 	});
     
 	it("works with transpile", function(done){
@@ -153,6 +165,12 @@ describe('amd - amd', function(){
 			namedDefines: true
 		};
 		convert("amd_deps",amd2amd,"amd_deps.js", options, done);
+	});
+	
+	it("should rename the define name if able", function(done){
+		convert("amd_named",amd2amd,"amd_named_amd.js", {namedDefines: true},done,{
+			name: "redefined"
+		});
 	});
 });
 
