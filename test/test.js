@@ -41,6 +41,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
 			}
+
 			assert.equal(""+res,""+resultData,"expected equals result");
 			done()
 		});
@@ -68,6 +69,7 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
 			}
+
 			assert.equal(""+res,""+resultData,"expected equals result");
 			done()
 		});
@@ -83,6 +85,12 @@ describe('es6 - cjs', function(){
 		global.System = {};
 		convert("es6",es62cjs,"es6_cjs.js", done);
     });
+
+		it('works with 6to5', function(done){
+			convert("es6", es62cjs, "es6_cjs_6to5.js", {
+				compiler: "6to5"
+			}, done);
+		});
 });
 
 describe('cjs - steal', function(){
@@ -191,6 +199,12 @@ describe('es6 - amd', function(){
 	
 	it("should work with bangs", function(done){
 		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd",{namedDefines: true},  done);
+	});
+
+	it("should work with 6to5", function(done){
+		doTranspile("es6", "es6", "es6_amd_6to5.js","amd", {
+			compiler: "6to5"
+		}, done);
 	});
 });
 
