@@ -9,4 +9,6 @@ exports["default"] = {
 	name: "es6Module"
 };
 var __useDefault = exports.__useDefault = true;
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
