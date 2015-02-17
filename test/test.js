@@ -88,7 +88,7 @@ describe('es6 - cjs', function(){
 
 		it('works with 6to5', function(done){
 			convert("es6", es62cjs, "es6_cjs_6to5.js", {
-				compiler: "6to5"
+				transpiler: "6to5"
 			}, done);
 		});
 });
@@ -203,7 +203,7 @@ describe('es6 - amd', function(){
 
 	it("should work with 6to5", function(done){
 		doTranspile("es6", "es6", "es6_amd_6to5.js","amd", {
-			compiler: "6to5"
+			transpiler: "6to5"
 		}, done);
 	});
 });

@@ -72,8 +72,7 @@ an [ES6 Load Record](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-l
  - __normalize__ `function(name, currentName, address) -> String` - A function
    that can be used to change moduleNames that are written in the transpiled result.
  - __namedDefines__ `Boolean=false` - Set to true to insert named defines. 
- - __compiler__ `String=traceur` - Set which ES6 compiler to use. Valid options
-   are `traceur` or `6to5` with `traceur` being the default.
+ - __transpiler__ `String=traceur` - Set which ES6 transpiler to use. Valid options are `traceur` or `6to5` with `traceur` being the default.
 
 ### `transpile.able(fromFormat, toFormat) -> transpiledPath`
 
