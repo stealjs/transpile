@@ -86,9 +86,9 @@ describe('es6 - cjs', function(){
 		convert("es6",es62cjs,"es6_cjs.js", done);
     });
 
-		it('works with 6to5', function(done){
-			convert("es6", es62cjs, "es6_cjs_6to5.js", {
-				transpiler: "6to5"
+		it('works with babel', function(done){
+			convert("es6", es62cjs, "es6_cjs_babel.js", {
+				transpiler: "babel"
 			}, done);
 		});
 });
@@ -201,9 +201,9 @@ describe('es6 - amd', function(){
 		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd",{namedDefines: true},  done);
 	});
 
-	it("should work with 6to5", function(done){
-		doTranspile("es6", "es6", "es6_amd_6to5.js","amd", {
-			transpiler: "6to5"
+	it("should work with babel", function(done){
+		doTranspile("es6", "es6", "es6_amd_babel.js","amd", {
+			transpiler: "babel"
 		}, done);
 	});
 });
