@@ -18,4 +18,4 @@ var $__default = {
         amdModule: amdMod,
         name: 'es6Module'
     };
-var __useDefault = true;
+var __useDefault = true; //# sourceMappingURL=es6_cjs_sm.js.map

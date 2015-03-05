@@ -1,5 +1,8 @@
 var bfs = require("./lib/bfs");
 var detect = require('js-module-formats').detect;
+var generate = require("./lib/generate");
+var getAst = require("./lib/get_ast");
+var sourceMapFileName = require("./lib/source_map_filename");
 var graph = {},
 	transpilers = {
 		"amd_cjs": require("./lib/amd_cjs"),
@@ -66,15 +69,25 @@ var transpile = {
 		
 		var copy = copyLoad(load);
 		var normalize = options.normalize;
+
+		options = options || {};
+		options.sourceMapFileName = sourceMapFileName(copy, options);
+
+		// Create the initial AST
+		if(format !== "es6") {
+			copy.ast = getAst(copy, options.sourceMapFileName);
+		}
+
+		var sourceContent = load.source;
 		
 		for(var i =0; i < path.length - 1; i++) {
 			var transpiler = transpilers[path[i]+"_"+path[i+1]] || toSelf;	
-			copy.source = transpiler(copy, options);
+			copy.ast = transpiler(copy, options);
 			// remove the normalize option after the first pass.  
 			delete options.normalize;
 		}
 		options.normalize = normalize;
-		return copy.source;
+		return generate(copy.ast, options, sourceContent);
 	},
 	able: function(from, to) {
 		var path;
