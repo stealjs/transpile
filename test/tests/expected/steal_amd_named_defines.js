@@ -1,4 +1,4 @@
-define([
+define('steal', [
     'foo/foo',
     'bar/bar'
 ], function (foo, bar) {

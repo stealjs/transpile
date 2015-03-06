@@ -1,4 +1,4 @@
-define('nested_steal', ['foo/foo'], function (foo) {
+define(['foo/foo'], function (foo) {
     if (foo) {
         steal('abc', function () {
         });
