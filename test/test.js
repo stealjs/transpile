@@ -211,6 +211,15 @@ describe('es6 - amd', function(){
 			transpiler: "babel"
 		}, done);
 	});
+
+	it("should pass in babel options", function(done){
+		doTranspile("es6", "es6", "es6_amd_babel_options.js", "amd", {
+			transpiler: "babel",
+			babelOptions: {
+				loose: "es6.modules"
+			}
+		}, done);
+	});
 });
 
 describe('cjs - amd', function(){

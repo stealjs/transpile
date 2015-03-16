@@ -6,7 +6,7 @@ define([
     var _interopRequire = function (obj) {
         return obj && obj.__esModule ? obj['default'] : obj;
     };
-    Object.defineProperty(exports, '__esModule', { value: true });
+    exports.__esModule = true;
     var amdMod = _interopRequire(_basicsAmdmodule);
     exports['default'] = {
         amdModule: amdMod,
