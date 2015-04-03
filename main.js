@@ -39,7 +39,7 @@ var copyLoad = function(load){
 };
 
 var toSelf = function(load){
-	return load.source;
+	return load.ast;
 };
 
 
