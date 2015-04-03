@@ -8,4 +8,4 @@ exports['default'] = {
     name: 'es6Module'
 };
 var __useDefault = exports.__useDefault = true;
-Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, '__esModule', { value: true }); //# sourceMappingURL=es62_cjs_sm.js.map

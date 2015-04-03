@@ -10,7 +10,8 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	cjs2amd =			require("../lib/cjs_amd"),
 	fs = require("fs"),
 	assert = require("assert"),
-	transpile = require("../main");
+	transpile = require("../main"),
+	generate = require("../lib/generate");
 
 var extend = function(d, s) {
 	for(var prop in s) {
@@ -34,7 +35,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 			assert.fail(err, null, "reading "+__dirname+"/tests/"+file+" failed");
 		}
 		load = extend({source: ""+data, address: __dirname+"/tests/"+moduleName+".js", name: moduleName}, load);
-		var res = converter(load, options);
+		var res = generate(converter(load, options)).code;
 		assert.ok(res, "got back a value");
 		
 		fs.readFile(__dirname+"/tests/expected/"+result, function(err, resultData){
@@ -69,28 +70,44 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
 			}
+			var code = res.code;
+			if(options.sourceMaps) {
+				code += " //# sourceMappingURL="+result+".map";
+			}
 
-			assert.equal(""+res,""+resultData,"expected equals result");
-			done()
+			assert.equal(code,""+resultData,"expected equals result");
+
+			if(!options.sourceMaps) {
+				done();
+				return;
+			}
+			fs.readFile(__dirname+"/tests/expected/"+result+".map", function(err, resultMap){
+				if(err) {
+					assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+".map failed");
+				}
+
+				assert.equal(res.map.toString(), resultMap+"", "expected map equals result");
+				done();
+			});
 		});
 	});
 };
 
 describe('es6 - cjs', function(){
-    it('should work', function(done){
-			convert("es6",es62cjs,"es6_cjs.js", done)
-    });
+	it('should work', function(done){
+		convert("es6",es62cjs,"es6_cjs.js", done);
+	});
     
-    it('works if global.System is something else (#14)', function(done){
+	it('works if global.System is something else (#14)', function(done){
 		global.System = {};
 		convert("es6",es62cjs,"es6_cjs.js", done);
-    });
+	});
 
-		it('works with babel', function(done){
-			convert("es6", es62cjs, "es6_cjs_babel.js", {
-				transpiler: "babel"
-			}, done);
-		});
+	it('works with babel', function(done){
+		convert("es6", es62cjs, "es6_cjs_babel.js", {
+			transpiler: "babel"
+		}, done);
+	});
 });
 
 describe('cjs - steal', function(){
@@ -146,7 +163,6 @@ describe("transpile", function(){
     });
 
 	it('to steal to cjs', function(done){
-		
 		doTranspile("steal","steal","steal_cjs.js","cjs", done);
     });
 
@@ -200,10 +216,9 @@ describe('metadata.format', function(){
 });
 
 describe('es6 - amd', function(){
-	
-	
 	it("should work with bangs", function(done){
-		doTranspile("es_with_bang","es6","es_with_bang_amd.js","amd",{namedDefines: true},  done);
+		doTranspile("es_with_bang", "es6", "es_with_bang_amd.js", "amd",
+					{ namedDefines: true },  done);
 	});
 
 	it("should work with babel", function(done){
@@ -311,3 +326,75 @@ describe('normalize options', function(){
 	
 });
 
+describe("Source Maps", function(){
+	var normal = { sourceMaps: true };
+	var content = { sourceMaps: true, sourceMapsContent: true };
+	[normal, content].forEach(function(opts) {
+		opts.baseURL = __dirname + "/tests";
+		opts.sourceRoot = "../";
+	});
+
+	describe("External file", function(){
+		it("steal - amd works", function(done){
+			doTranspile("steal", "steal", "steal_amd_sm.js", "amd", normal, done);
+		});
+
+		it("steal - cjs works", function(done){
+			doTranspile("steal", "steal", "steal_cjs_sm.js", "cjs", normal, done);
+		});
+
+		it("cjs - amd works", function(done){
+			doTranspile("cjs", "cjs", "cjs_amd_sm.js", "amd", normal, done);
+		});
+
+		it("amd - cjs works", function(done){
+			doTranspile("amd", "amd", "amd_cjs_sm.js", "cjs", normal, done);
+		});
+
+		it("amd - amd works", function(done){
+			doTranspile("amd", "amd", "amd_amd_sm.js", "amd", normal, done);
+		});
+
+		it("es6(traceur) - amd works", function(done){
+			doTranspile("es6", "es6", "es6_amd_sm.js", "amd", normal, done);
+		});
+
+		it("es6(babel) - amd works", function(done){
+			var opts = extend({ transpiler: "babel" }, normal);
+			doTranspile("es6", "es6", "es62_amd_sm.js", "amd", opts, done);
+		});
+
+		it("es6(traceur) - cjs works", function(done){
+			doTranspile("es6", "es6", "es6_cjs_sm.js", "cjs", normal, done);
+		});
+
+		it("es6(babel) - cjs works", function(done){
+			var opts = extend({ transpiler: "babel" }, normal);
+			doTranspile("es6", "es6", "es62_cjs_sm.js", "cjs", opts, done);
+		});
+	});
+
+	describe("Content included", function(){
+		it("steal - amd works", function(done){
+			doTranspile("steal", "steal", "steal_amd_cont_sm.js", "amd", content, done);
+		});
+
+		it("steal - cjs works", function(done){
+			doTranspile("steal", "steal", "steal_cjs_cont_sm.js", "cjs", content, done);
+		});
+
+		it("amd - cjs works", function(done){
+			doTranspile("amd", "amd", "amd_cjs_cont_sm.js", "cjs", content, done);
+		});
+
+		it("es6(traceur) - amd works", function(done){
+			doTranspile("es6", "es6", "es6_amd_cont_sm.js", "amd", content, done);
+		});
+
+		it("es6(babel) - amd works", function(done){
+			var opts = extend({ transpiler: "babel" }, content);
+			doTranspile("es6", "es6", "es62_amd_cont_sm.js", "amd", opts, done);
+		});
+
+	});
+});

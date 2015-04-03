@@ -35,11 +35,11 @@ Formats are specified by strings like:
  - "steal" - steal syntax like `steal('jquery', function($){})`
 
 
-### `transpile.to(load, format, options) -> transpiledSource`
+### `transpile.to(load, format, options) -> transpiledResult`
 
 Transpiles from the `load`'s format to the specified format. If
 the `load` does not specify a format, `"es6"` modules are assumed. Returns
-the transpiled source.
+an object containing the transpiled source and sourceMap (if sourceMap option provided).
 
 Example:
 
@@ -51,7 +51,7 @@ var res = transpile.to({
   metadata: {format: "cjs"}
 }, "amd")
 
-res //-> "define("my/module", function(require, exports, module) { ... "
+res.code //-> "define("my/module", function(require, exports, module) { ... "
 ```
     
 A load is an object in the shape of 
@@ -65,6 +65,18 @@ an [ES6 Load Record](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-l
 }
 ```
 
+#### NOTE
+
+Previously `transpile.to` returned a string containing the transpiled source. To accomodate Source Maps support the API has changed and now returns an object that looks like:
+
+```js
+{
+  code: "define(...", // The transpiled source,
+  map: {}, // A source map, if sourceMaps option is provided.
+  ast: {} // A Mozilla Parser API compatible AST, created by Esprima
+}
+```
+
 #### options
 
  - __normalizeMap__ `Object<moduleName,moduleName>` - A mapping module names that will
@@ -73,6 +85,8 @@ an [ES6 Load Record](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-l
    that can be used to change moduleNames that are written in the transpiled result.
  - __namedDefines__ `Boolean=false` - Set to true to insert named defines. 
  - __transpiler__ `String=traceur` - Set which ES6 transpiler to use. Valid options are `traceur` or `6to5` with `traceur` being the default.
+ - __sourceMaps__ `Boolean=false` - Set to true to return a `map` and `ast` object along with the result.
+ - __sourceMapsContent__ `Boolean=false` - If `sourceMaps` is set to true, this option will include the original source contents with the source maps.
 
 ### `transpile.able(fromFormat, toFormat) -> transpiledPath`
 
