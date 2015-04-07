@@ -323,6 +323,14 @@ describe('normalize options', function(){
 		},done);
 		
 	});
+
+	it("cjs - cjs + normalize", function(done){
+		doTranspile("cjs_needing_normalize", "cjs", "cjs_needing_normalize_cjs.js", "cjs", {
+			normalize: function(name){
+				return name + "-normalized";
+			}
+		}, done);
+	});
 	
 });
 

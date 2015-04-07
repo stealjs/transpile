@@ -12,7 +12,8 @@ var graph = {},
 		"es6_cjs": require("./lib/es6_cjs"),
 		"steal_amd": require("./lib/steal_amd"),
 		"amd_amd": require("./lib/amd_amd"),
-		"global_amd": require("./lib/global_amd")
+		"global_amd": require("./lib/global_amd"),
+		"cjs_cjs": require("./lib/cjs_cjs")
 	};
 
 for(var edge in transpilers) {
