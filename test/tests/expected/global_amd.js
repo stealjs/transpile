@@ -1,7 +1,10 @@
-System.register('global', [], false, function (__require, __exports, __module) {
-    System.get('@@global-helpers').prepareGlobal(__module.id, []);
+define('global', [
+    'module',
+    '@loader'
+], function (__module, __loader) {
+    __loader.get('@@global-helpers').prepareGlobal(__module.id, []);
     (function () {
         var GLOBAL = 'I don\'t like "Quotes"';
-    }.call(System.global));
-    return System.get('@@global-helpers').retrieveGlobal(__module.id, false);
+    }.call(__loader.global));
+    return __loader.get('@@global-helpers').retrieveGlobal(__module.id, false);
 });
