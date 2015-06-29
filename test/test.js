@@ -29,7 +29,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 	if(!load) {
 		load = {};
 	}
-	
+
 	fs.readFile(__dirname+"/tests/"+moduleName+".js", function(err, data){
 		if(err) {
 			assert.fail(err, null, "reading "+__dirname+"/tests/"+file+" failed");
@@ -37,7 +37,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 		load = extend({source: ""+data, address: __dirname+"/tests/"+moduleName+".js", name: moduleName}, load);
 		var res = generate(converter(load, options)).code;
 		assert.ok(res, "got back a value");
-		
+
 		fs.readFile(__dirname+"/tests/expected/"+result, function(err, resultData){
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
@@ -59,13 +59,13 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 			assert.fail(err, null, "reading "+__dirname+"/tests/"+file+" failed");
 		}
 		var res = transpile.to({
-			source: ""+data, 
-			address: __dirname+"/tests/"+moduleName+".js", 
-			name: moduleName, 
+			source: ""+data,
+			address: __dirname+"/tests/"+moduleName+".js",
+			name: moduleName,
 			metadata: {format: format}
 		}, resultFormat, options);
 		assert.ok(res, "got back a value");
-		
+
 		fs.readFile(__dirname+"/tests/expected/"+result, function(err, resultData){
 			if(err) {
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
@@ -97,7 +97,7 @@ describe('es6 - cjs', function(){
 	it('should work', function(done){
 		convert("es6",es62cjs,"es6_cjs.js", done);
 	});
-    
+
 	it('works if global.System is something else (#14)', function(done){
 		global.System = {};
 		convert("es6",es62cjs,"es6_cjs.js", done);
@@ -129,11 +129,11 @@ describe('steal - amd', function(){
     it('should work', function(done){
 		convert("steal",steal2amd,"steal_amd.js", done);
     });
-    
+
     it('should work with namedDefines', function(done){
 		convert("steal",steal2amd,"steal_amd_named_defines.js", {namedDefines: true}, done);
     });
-    
+
     it('should leave nested steals alone', function(done){
 		convert("nested_steal",steal2amd,"nested_steal_amd.js", done);
     });
@@ -146,7 +146,7 @@ describe('global - amd', function(){
 });
 
 describe("transpile", function(){
-	
+
 	it('able to steal to cjs', function(){
 		var res = transpile.able("steal","cjs");
 		assert.deepEqual(res,["steal","amd"]);
@@ -156,7 +156,7 @@ describe("transpile", function(){
 		var res = transpile.able("steal","amd");
 		assert.deepEqual(res,["steal"]);
     });
-    
+
     it('able to es6 to amd', function(){
 		var res = transpile.able("es6","amd");
 		assert.deepEqual(res,["es6"]);
@@ -169,9 +169,9 @@ describe("transpile", function(){
 	it('able to global to amd', function(done){
 		doTranspile("global","global","global_amd_with_format.js","amd", done);
 	});
-	
+
 	it('able to steal to cjs with missing args', function(done){
-		
+
 		doTranspile("steal_no_value_arg","steal","steal_no_value_arg_cjs.js","cjs",done);
 	});
 });
@@ -181,7 +181,7 @@ describe('amd - amd', function(){
 	it('should work', function(done){
 		convert("amd",amd2amd,"amd_amd.js", {namedDefines: true},done);
 	});
-    
+
 	it("works with transpile", function(done){
 		doTranspile("amd","amd","amd_amd.js","amd",{namedDefines: true}, done);
 	});
@@ -195,7 +195,7 @@ describe('amd - amd', function(){
 		};
 		convert("amd_deps",amd2amd,"amd_deps.js", options, done);
 	});
-	
+
 	it("should rename the define name if able", function(done){
 		convert("amd_named",amd2amd,"amd_named_amd.js", {namedDefines: true},done,{
 			name: "redefined"
@@ -239,7 +239,7 @@ describe('cjs - amd', function(){
 		convert("cjs_deps", cjs2amd, "cjs_deps.js", options, done);
 	});
 	it('should be able to add named defines',function(done){
-		
+
 		var options = {
 			normalizeMap: {
 				'./b': 'b'
@@ -277,9 +277,9 @@ describe('normalize options', function(){
 			namedDefines: true
 		}, done);
 	});
-	
+
 	it('es6 - cjs + normalize',function(done){
-		
+
 		convert("es_needing_normalize",es62cjs,"es_needing_normalize_cjs.js", {
 			normalize: function(name){
 
@@ -293,11 +293,11 @@ describe('normalize options', function(){
 				return name;
 			}
 		}, done);
-		
+
 	});
-	
+
 	it('amd - cjs + normalize',function(done){
-		
+
 		convert("amd_needing_normalize",amd2cjs,"amd_needing_normalize_cjs.js", {
 			normalize: function(name){
 
@@ -311,17 +311,17 @@ describe('normalize options', function(){
 				return name;
 			}
 		}, done);
-		
+
 	});
-	
+
 	it('steal - cjs + normalize',function(done){
-		
+
 		doTranspile("steal_needing_normalize","steal","steal_needing_normalize_cjs.js","cjs", {
 			normalize: function(name){
 				return name+"-normalized";
 			}
 		},done);
-		
+
 	});
 
 	it("cjs - cjs + normalize", function(done){
@@ -331,7 +331,7 @@ describe('normalize options', function(){
 			}
 		}, done);
 	});
-	
+
 });
 
 describe("Source Maps", function(){
