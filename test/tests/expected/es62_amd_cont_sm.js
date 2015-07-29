@@ -3,14 +3,15 @@ define([
     'basics/amdmodule'
 ], function (exports, _basicsAmdmodule) {
     'use strict';
-    var _interopRequire = function (obj) {
-        return obj && obj.__esModule ? obj['default'] : obj;
-    };
-    var amdMod = _interopRequire(_basicsAmdmodule);
+    Object.defineProperty(exports, '__esModule', { value: true });
+    function _interopRequireDefault(obj) {
+        return obj && obj.__esModule ? obj : { 'default': obj };
+    }
+    var _amdMod = _interopRequireDefault(_basicsAmdmodule);
     exports['default'] = {
-        amdModule: amdMod,
+        amdModule: _amdMod['default'],
         name: 'es6Module'
     };
-    var __useDefault = exports.__useDefault = true;
-    Object.defineProperty(exports, '__esModule', { value: true });
+    var __useDefault = true;
+    exports.__useDefault = __useDefault;
 }); //# sourceMappingURL=es62_amd_cont_sm.js.map

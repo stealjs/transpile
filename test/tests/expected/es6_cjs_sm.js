@@ -1,4 +1,11 @@
 'use strict';
+var $__basics_47_amdmodule__;
+var amdMod = ($__basics_47_amdmodule__ = require('basics/amdmodule'), $__basics_47_amdmodule__ && $__basics_47_amdmodule__.__esModule && $__basics_47_amdmodule__ || { default: $__basics_47_amdmodule__ }).default;
+var $__default = {
+        amdModule: amdMod,
+        name: 'es6Module'
+    };
+var __useDefault = true;
 Object.defineProperties(module.exports, {
     default: {
         get: function () {
@@ -11,11 +18,4 @@ Object.defineProperties(module.exports, {
         }
     },
     __esModule: { value: true }
-});
-var $__basics_47_amdmodule__;
-var amdMod = ($__basics_47_amdmodule__ = require('basics/amdmodule'), $__basics_47_amdmodule__ && $__basics_47_amdmodule__.__esModule && $__basics_47_amdmodule__ || { default: $__basics_47_amdmodule__ }).default;
-var $__default = {
-        amdModule: amdMod,
-        name: 'es6Module'
-    };
-var __useDefault = true; //# sourceMappingURL=es6_cjs_sm.js.map
+}); //# sourceMappingURL=es6_cjs_sm.js.map
