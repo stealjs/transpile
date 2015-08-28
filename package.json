@@ -35,6 +35,7 @@
     }
   },
   "scripts": {
+    "mocha": "mocha test/*.js",
     "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
   },
   "licenses": [
