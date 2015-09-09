@@ -1,7 +1,7 @@
 {
   "name" : "transpile",
   "description" : "Transpiles JavaScript modules from one format to another.",
-  "version" : "0.7.2",
+  "version" : "0.8.0-pre.1",
   "author" : {
     "name" : "Bitovi",
     "email" : "contact@bitovi.com",
@@ -35,6 +35,7 @@
     }
   },
   "scripts": {
+    "mocha": "mocha test/*.js",
     "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
   },
   "licenses": [
