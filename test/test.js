@@ -135,6 +135,9 @@ describe('cjs - steal', function(){
     it('should work with objects', function(done){
 		convert("cjs2",cjs2steal,"cjs2_steal.js", done)
     });
+	it('should work with npm names', function(done){
+		convert("cjs_npm", cjs2steal,"cjs_npm_steal.js", done);
+	});
 });
 
 describe('amd - cjs', function(){
