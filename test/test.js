@@ -12,7 +12,7 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	assert = require("assert"),
 	transpile = require("../main"),
 	generate = require("../lib/generate");
-	
+
 var isWin = /^win/.test(process.platform);
 
 var extend = function(d, s) {
@@ -47,7 +47,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 
 			if(isWin) {
 				resultData = (""+resultData).replace(/[\n\r]/g, "");
-				res = (""+res).replace(/[\n]/g, "");				
+				res = (""+res).replace(/[\n]/g, "");
 			}
 
 			assert.equal(""+res, ""+resultData,"expected equals result");
@@ -81,10 +81,10 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 			if(options.sourceMaps) {
 				code += " //# sourceMappingURL="+result+".map";
 			}
-			
+
 			if(isWin) {
 				resultData = (""+resultData).replace(/[\n\r]/g, "");
-				code = (""+code).replace(/[\n]/g, "");				
+				code = (""+code).replace(/[\n]/g, "");
 			}
 
 			assert.equal(""+code,""+resultData,"expected equals result");
@@ -97,9 +97,9 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 				if(err) {
 					assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+".map failed");
 				}
-				
+
 				var resultMap = res.map+"";
-				
+
 				if(isWin) {
 					resultMap = resultMap.replace(/\\r/g, "");
 				}
@@ -113,7 +113,7 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 
 describe('es6 - cjs', function(){
 	it('should work', function(done){
-		convert("es6",es62cjs,"es6_cjs.js", done);
+		convert("es6", es62cjs, "es6_cjs.js", done);
 	});
 
 	it('works if global.System is something else (#14)', function(done){
@@ -130,10 +130,10 @@ describe('es6 - cjs', function(){
 
 describe('cjs - steal', function(){
     it('should work', function(done){
-		convert("cjs",cjs2steal,"cjs_steal.js", done)
+		convert("cjs",cjs2steal,"cjs_steal.js", done);
     });
     it('should work with objects', function(done){
-		convert("cjs2",cjs2steal,"cjs2_steal.js", done)
+		convert("cjs2",cjs2steal,"cjs2_steal.js", done);
     });
 	it('should work with npm names', function(done){
 		convert("cjs_npm", cjs2steal,"cjs_npm_steal.js", done);
@@ -142,7 +142,7 @@ describe('cjs - steal', function(){
 
 describe('amd - cjs', function(){
     it('should work', function(done){
-		convert("amd",amd2cjs,"amd_cjs.js", done)
+		convert("amd",amd2cjs,"amd_cjs.js", done);
     });
 });
 
@@ -162,7 +162,7 @@ describe('steal - amd', function(){
 
 describe('global - amd', function(){
     it('should work', function(done){
-		convert("global",global2amd,"global_amd.js", done)
+		convert("global",global2amd,"global_amd.js", done);
     });
 });
 

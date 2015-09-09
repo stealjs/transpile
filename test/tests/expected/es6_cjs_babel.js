@@ -1,11 +1,13 @@
 'use strict';
-var _interopRequire = function (obj) {
-    return obj && obj.__esModule ? obj['default'] : obj;
-};
-var amdMod = _interopRequire(require('basics/amdmodule'));
+Object.defineProperty(exports, '__esModule', { value: true });
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { 'default': obj };
+}
+var _basicsAmdmodule = require('basics/amdmodule');
+var _basicsAmdmodule2 = _interopRequireDefault(_basicsAmdmodule);
 exports['default'] = {
-    amdModule: amdMod,
+    amdModule: _basicsAmdmodule2['default'],
     name: 'es6Module'
 };
-var __useDefault = exports.__useDefault = true;
-Object.defineProperty(exports, '__esModule', { value: true });
+var __useDefault = true;
+exports.__useDefault = __useDefault;
