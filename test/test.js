@@ -13,6 +13,8 @@ var es62cjs = 		require("../lib/es6_cjs"),
 	transpile = require("../main"),
 	generate = require("../lib/generate");
 
+var isWin = /^win/.test(process.platform);
+
 var extend = function(d, s) {
 	for(var prop in s) {
 		d[prop] = s[prop];
@@ -43,8 +45,13 @@ var convert = function(moduleName, converter, result, options, done, load){
 				assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+" failed");
 			}
 
-			assert.equal(""+res,""+resultData,"expected equals result");
-			done();
+			if(isWin) {
+				resultData = (""+resultData).replace(/[\n\r]/g, "");
+				res = (""+res).replace(/[\n]/g, "");
+			}
+
+			assert.equal(""+res, ""+resultData,"expected equals result");
+			done()
 		});
 	});
 };
@@ -75,18 +82,29 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 				code += " //# sourceMappingURL="+result+".map";
 			}
 
-			assert.equal(code,""+resultData,"expected equals result");
+			if(isWin) {
+				resultData = (""+resultData).replace(/[\n\r]/g, "");
+				code = (""+code).replace(/[\n]/g, "");
+			}
+
+			assert.equal(""+code,""+resultData,"expected equals result");
 
 			if(!options.sourceMaps) {
 				done();
 				return;
 			}
-			fs.readFile(__dirname+"/tests/expected/"+result+".map", function(err, resultMap){
+			fs.readFile(__dirname+"/tests/expected/"+result+".map", function(err, expectedMap){
 				if(err) {
 					assert.fail(err, null, "reading "+__dirname+"/tests/expected/"+result+".map failed");
 				}
 
-				assert.equal(res.map.toString(), resultMap+"", "expected map equals result");
+				var resultMap = res.map+"";
+
+				if(isWin) {
+					resultMap = resultMap.replace(/\\r/g, "");
+				}
+
+				assert.equal(resultMap, expectedMap+"", "expected map equals result");
 				done();
 			});
 		});
@@ -117,6 +135,9 @@ describe('cjs - steal', function(){
     it('should work with objects', function(done){
 		convert("cjs2",cjs2steal,"cjs2_steal.js", done);
     });
+	it('should work with npm names', function(done){
+		convert("cjs_npm", cjs2steal,"cjs_npm_steal.js", done);
+	});
 });
 
 describe('amd - cjs', function(){
