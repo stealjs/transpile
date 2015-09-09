@@ -47,6 +47,6 @@
   "main": "main",
   "repository": {
     "type": "git",
-    "url": "git://github.com/stealjs/steal-tools.git"
+    "url": "git://github.com/stealjs/transpile.git"
   }
 }
