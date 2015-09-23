@@ -162,7 +162,8 @@ describe('steal - amd', function(){
 
 describe('global - amd', function(){
     it('should work', function(done){
-		convert("global",global2amd,"global_amd.js", done);
+		var load = { metadata: { format: "global", exports: "GLOBAL" } };
+		convert("global",global2amd,"global_amd.js", {}, done, load);
     });
 });
 
