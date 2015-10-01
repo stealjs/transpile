@@ -165,6 +165,39 @@ describe('global - amd', function(){
 		var load = { metadata: { format: "global", exports: "GLOBAL" } };
 		convert("global",global2amd,"global_amd.js", {}, done, load);
     });
+
+	it("should include the export name", function(done){
+		var load = {
+			metadata: {
+				format: "global",
+				deps: ["foo"],
+				exports: "GLOBAL"
+			}
+		};
+		convert("global", global2amd, "global_amd_export.js", {}, done, load);
+	});
+
+	it("if no export is defined do not pass the exportname", function(done){
+		var load = {
+			metadata: {
+				format: "global",
+				deps: []
+			}
+		};
+		convert("global", global2amd, "global_amd_noexport.js", {}, done, load);
+	});
+
+	it("works with an init function passed", function(done){
+		var load = {
+			metadata: {
+				format: "global",
+				init: function(){
+					return window.FOO;
+				}
+			}
+		};
+		convert("global", global2amd, "global_amd_init.js", {}, done, load);
+	});
 });
 
 describe("transpile", function(){
