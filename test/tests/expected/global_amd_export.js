@@ -1,8 +1,9 @@
 define('global', [
     'module',
-    '@loader'
+    '@loader',
+    'foo'
 ], function (module, loader) {
-    loader.get('@@global-helpers').prepareGlobal(module.id, [], 'GLOBAL');
+    loader.get('@@global-helpers').prepareGlobal(module.id, ['foo'], 'GLOBAL');
     var define = loader.global.define;
     var require = loader.global.require;
     var source = 'var GLOBAL = "I don\'t like \\"Quotes\\"";';
