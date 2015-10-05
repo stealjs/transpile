@@ -15,5 +15,5 @@ define('global', [
     });
     loader.global.require = require;
     loader.global.define = define;
-    return loader.get('@@global-helpers').retrieveGlobal(module.id, false);
+    return loader.get('@@global-helpers').retrieveGlobal(module.id, undefined);
 });
