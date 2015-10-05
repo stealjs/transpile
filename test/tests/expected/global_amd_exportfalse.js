@@ -2,7 +2,7 @@ define('global', [
     'module',
     '@loader'
 ], function (module, loader) {
-    loader.get('@@global-helpers').prepareGlobal(module.id, []);
+    loader.get('@@global-helpers').prepareGlobal(module.id, [], false);
     var define = loader.global.define;
     var require = loader.global.require;
     var source = 'var GLOBAL = "I don\'t like \\"Quotes\\"";';
@@ -15,5 +15,5 @@ define('global', [
     });
     loader.global.require = require;
     loader.global.define = define;
-    return loader.get('@@global-helpers').retrieveGlobal(module.id, undefined);
+    return loader.get('@@global-helpers').retrieveGlobal(module.id, false);
 });

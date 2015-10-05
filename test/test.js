@@ -187,6 +187,16 @@ describe('global - amd', function(){
 		convert("global", global2amd, "global_amd_noexport.js", {}, done, load);
 	});
 
+	it("exports: false passes the value false", function(done){
+		var load = {
+			metadata: {
+				format: "global",
+				exports: false
+			}
+		};
+		convert("global", global2amd, "global_amd_exportfalse.js", {}, done, load);
+	});
+
 	it("works with an init function passed", function(done){
 		var load = {
 			metadata: {
