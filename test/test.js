@@ -291,6 +291,15 @@ describe('es6 - amd', function(){
 			transpiler: "babel"
 		}, done);
 	});
+
+	it("should work with babel in loose mode", function(done){
+		doTranspile("es6", "es6", "es6_amd_babel_loose_mode.js","amd", {
+			transpiler: "babel",
+			babelOptions: {
+				loose: "es6.modules"
+			}
+		}, done);
+	});
 });
 
 describe('cjs - amd', function(){
