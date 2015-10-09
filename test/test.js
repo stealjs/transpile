@@ -300,6 +300,14 @@ describe('es6 - amd', function(){
 			}
 		}, done);
 	});
+
+	it("should work with traceurOptions", function(done){
+		doTranspile("es6", "es6", "es_with_traceur_options.js", "amd", {
+			traceurOptions: {
+				properTailCalls: true
+			}
+		},  done);
+	});
 });
 
 describe('cjs - amd', function(){
