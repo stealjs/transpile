@@ -5,9 +5,9 @@ define(['basics/amdmodule'], function ($__0) {
         $__0 = { default: $__0 };
     var amdMod = $__0.default;
     var $__default = {
-            amdModule: amdMod,
-            name: 'es6Module'
-        };
+        amdModule: amdMod,
+        name: 'es6Module'
+    };
     var __useDefault = true;
     return $__3 = {}, Object.defineProperty($__3, 'default', {
         get: function () {
