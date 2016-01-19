@@ -85,6 +85,7 @@ Previously `transpile.to` returned a string containing the transpiled source. To
    that can be used to change moduleNames that are written in the transpiled result.
  - __namedDefines__ `Boolean=false` - Set to true to insert named defines. 
  - __transpiler__ `String=traceur` - Set which ES6 transpiler to use. Valid options are `traceur` or `6to5` with `traceur` being the default.
+ - __transpile__ `function(source, compileOptions, options) -> Object` - If you want to handle tranpiling yourself and not use the built-in options, this is a function that will be given the source and is expected to return an object containing a `code` string.
  - __sourceMaps__ `Boolean=false` - Set to true to return a `map` and `ast` object along with the result.
  - __sourceMapsContent__ `Boolean=false` - If `sourceMaps` is set to true, this option will include the original source contents with the source maps.
 
