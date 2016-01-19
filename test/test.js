@@ -416,6 +416,22 @@ describe('normalize options', function(){
 
 });
 
+describe("transpile options", function(){
+	it("es6 - cjs + normalize",function(done){
+		var options = {
+			transpile: function(source, compileOptions, options){
+				return {
+					code: 'require("foo")'
+				};
+			}
+		};
+
+		convert("es_needing_normalize",es62cjs,"es_self_transpile.js", options,
+				done);
+	});
+
+});
+
 describe("Source Maps", function(){
 	var normal = { sourceMaps: true };
 	var content = { sourceMaps: true, sourceMapsContent: true };
