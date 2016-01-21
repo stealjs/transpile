@@ -104,6 +104,8 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 					resultMap = resultMap.replace(/\\r/g, "");
 				}
 
+				require('fs').writeFileSync(result + ".map", resultMap, "utf8");
+
 				assert.equal(resultMap, expectedMap+"", "expected map equals result");
 				done();
 			});
@@ -289,15 +291,6 @@ describe('es6 - amd', function(){
 	it("should work with babel", function(done){
 		doTranspile("es6", "es6", "es6_amd_babel.js","amd", {
 			transpiler: "babel"
-		}, done);
-	});
-
-	it("should work with babel in loose mode", function(done){
-		doTranspile("es6", "es6", "es6_amd_babel_loose_mode.js","amd", {
-			transpiler: "babel",
-			babelOptions: {
-				loose: "es6.modules"
-			}
 		}, done);
 	});
 
