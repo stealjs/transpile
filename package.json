@@ -1,11 +1,11 @@
 {
-  "name" : "transpile",
-  "description" : "Transpiles JavaScript modules from one format to another.",
-  "version" : "0.9.4",
-  "author" : {
-    "name" : "Bitovi",
-    "email" : "contact@bitovi.com",
-    "web" : "http://bitovi.com/"
+  "name": "transpile",
+  "description": "Transpiles JavaScript modules from one format to another.",
+  "version": "0.9.4",
+  "author": {
+    "name": "Bitovi",
+    "email": "contact@bitovi.com",
+    "web": "http://bitovi.com/"
   },
   "dependencies": {
     "babel-core": "5.8.14",
@@ -17,7 +17,8 @@
     "js-string-escape": "1.0.0",
     "object.assign": "^4.0.1",
     "sourcemap-to-ast": "0.0.2",
-    "traceur": "0.0.91"
+    "traceur": "0.0.91",
+    "urix": "^0.1.0"
   },
   "devDependencies": {
     "chai": "*",
@@ -37,7 +38,8 @@
   },
   "scripts": {
     "mocha": "mocha test/*.js",
-    "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
+    "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec",
+    "test-windows": "node_modules\\.bin\\mocha test\\*.js --reporter spec"
   },
   "licenses": [
     {
