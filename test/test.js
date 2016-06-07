@@ -322,6 +322,15 @@ describe('cjs - amd', function(){
 
 		convert("cjs_deps", cjs2amd, "cjs_deps_named_defines.js", options, done);
 	});
+	it('converts a module that uses global', function(done){
+		convert("cjs_global", cjs2amd, "cjs_global.js", done);
+	});
+	it('converts a module that uses __dirname', function(done){
+		convert("cjs_dirname", cjs2amd, "cjs_dirname.js", done);
+	});
+	it('converts a module that uses global and __dirname', function(done){
+		convert("cjs_global_dirname", cjs2amd, "cjs_global_dirname.js", done);
+	});
 });
 
 describe('normalize options', function(){
