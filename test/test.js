@@ -292,15 +292,6 @@ describe('es6 - amd', function(){
 		}, done);
 	});
 
-	it("should work with babel in loose mode", function(done){
-		doTranspile("es6", "es6", "es6_amd_babel_loose_mode.js","amd", {
-			transpiler: "babel",
-			babelOptions: {
-				loose: "es6.modules"
-			}
-		}, done);
-	});
-
 	it("should work with traceurOptions", function(done){
 		doTranspile("es6", "es6", "es_with_traceur_options.js", "amd", {
 			traceurOptions: {
@@ -330,6 +321,15 @@ describe('cjs - amd', function(){
 		};
 
 		convert("cjs_deps", cjs2amd, "cjs_deps_named_defines.js", options, done);
+	});
+	it('converts a module that uses global', function(done){
+		convert("cjs_global", cjs2amd, "cjs_global.js", done);
+	});
+	it('converts a module that uses __dirname', function(done){
+		convert("cjs_dirname", cjs2amd, "cjs_dirname.js", done);
+	});
+	it('converts a module that uses global and __dirname', function(done){
+		convert("cjs_global_dirname", cjs2amd, "cjs_global_dirname.js", done);
 	});
 });
 
