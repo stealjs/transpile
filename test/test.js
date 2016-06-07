@@ -104,8 +104,6 @@ var doTranspile = function(moduleName, format, result, resultFormat, options, do
 					resultMap = resultMap.replace(/\\r/g, "");
 				}
 
-				require('fs').writeFileSync(result + ".map", resultMap, "utf8");
-
 				assert.equal(resultMap, expectedMap+"", "expected map equals result");
 				done();
 			});
