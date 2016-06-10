@@ -334,6 +334,9 @@ describe('cjs - amd', function(){
 	it('converts a module that uses global', function(done){
 		convert("cjs_global", cjs2amd, "cjs_global.js", done);
 	});
+	it('converts a module that uses global without dot operator', function(done){
+		convert("cjs_global_without_dot", cjs2amd, "cjs_global_without_dot.js", done);
+	});
 	it('converts a module that uses __dirname', function(done){
 		convert("cjs_dirname", cjs2amd, "cjs_dirname.js", done);
 	});
