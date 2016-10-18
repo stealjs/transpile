@@ -296,7 +296,9 @@ describe('es6 - amd', function(){
 		doTranspile("es6", "es6", "es6_amd_babel_loose_mode.js","amd", {
 			transpiler: "babel",
 			babelOptions: {
-				loose: "es6.modules"
+				presets: [
+					'es2015-loose'
+				]
 			}
 		}, done);
 	});
