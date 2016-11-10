@@ -123,7 +123,12 @@ describe('es6 - cjs', function(){
 
 	it('works with babel', function(done){
 		convert("es6", es62cjs, "es6_cjs_babel.js", {
-			transpiler: "babel"
+			transpiler: "babel",
+			babelOptions: {
+				optional: {},
+				blacklist: [],
+				whitelist: []
+			}
 		}, done);
 	});
 });
