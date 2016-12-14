@@ -1,14 +1,17 @@
 {
   "name": "transpile",
   "description": "Transpiles JavaScript modules from one format to another.",
-  "version": "0.9.7",
+  "version": "1.0.0-pre.2",
   "author": {
     "name": "Bitovi",
     "email": "contact@bitovi.com",
     "web": "http://bitovi.com/"
   },
   "dependencies": {
-    "babel-core": "5.8.14",
+    "babel-core": "^6.13.0",
+    "babel-preset-es2015": "^6.13.0",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
     "comparify": "0.1.0",
     "escodegen": "^1.7.0",
     "esprima": "^2.7.0",
