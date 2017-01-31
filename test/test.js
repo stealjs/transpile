@@ -166,10 +166,10 @@ describe('steal - amd', function(){
 });
 
 describe('global - amd', function(){
-    it('should work', function(done){
+	it('should work', function(done){
 		var load = { metadata: { format: "global", exports: "GLOBAL" } };
 		convert("global",global2amd,"global_amd.js", {}, done, load);
-    });
+	});
 
 	it("should include the export name", function(done){
 		var load = {
@@ -220,21 +220,21 @@ describe("transpile", function(){
 	it('able to steal to cjs', function(){
 		var res = transpile.able("steal","cjs");
 		assert.deepEqual(res,["steal","amd"]);
-    });
+	});
 
 	it('able to steal to amd', function(){
 		var res = transpile.able("steal","amd");
 		assert.deepEqual(res,["steal"]);
-    });
+	});
 
-    it('able to es6 to amd', function(){
+	it('able to es6 to amd', function(){
 		var res = transpile.able("es6","amd");
 		assert.deepEqual(res,["es6"]);
-    });
+	});
 
 	it('to steal to cjs', function(done){
 		doTranspile("steal","steal","steal_cjs.js","cjs", done);
-    });
+	});
 
 	it('able to global to amd', function(done){
 		doTranspile("global","global","global_amd_with_format.js","amd", done);
