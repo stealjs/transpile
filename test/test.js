@@ -134,12 +134,14 @@ describe('es6 - cjs', function(){
 });
 
 describe('cjs - steal', function(){
-    it('should work', function(done){
+	it('should work', function(done){
 		convert("cjs",cjs2steal,"cjs_steal.js", done);
-    });
-    it('should work with objects', function(done){
+	});
+
+	it('should work with objects', function(done){
 		convert("cjs2",cjs2steal,"cjs2_steal.js", done);
-    });
+	});
+
 	it('should work with npm names', function(done){
 		convert("cjs_npm", cjs2steal,"cjs_npm_steal.js", done);
 	});
@@ -276,13 +278,15 @@ describe('amd - amd', function(){
 describe('metadata.format', function(){
 	it("should be detected from amd source", function(done){
 		doTranspile("amd",undefined,"amd_amd.js","amd", {namedDefines: true}, done);
-    });
+	});
+
 	it("should be detected from steal source", function(done){
 		doTranspile("steal",undefined,"steal_cjs.js","cjs", done);
-    });
-    it('should be detected from es6 source', function(done){
+	});
+
+	it('should be detected from es6 source', function(done){
 		doTranspile("es6",undefined,"es6_cjs.js", "cjs", done);
-    });
+	});
 });
 
 describe('es6 - amd', function(){

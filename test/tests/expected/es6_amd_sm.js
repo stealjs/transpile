@@ -1,8 +1,8 @@
-define(['basics/amdmodule'], function ($__0) {
+define(['basics/amdmodule'], function ($__1) {
     'use strict';
-    if (!$__0 || !$__0.__esModule)
-        $__0 = { default: $__0 };
-    var amdMod = $__0.default;
+    if (!$__1 || !$__1.__esModule)
+        $__1 = { default: $__1 };
+    var amdMod = $__1.default;
     var $__default = {
         amdModule: amdMod,
         name: 'es6Module'
