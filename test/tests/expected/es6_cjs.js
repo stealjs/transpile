@@ -1,21 +1,26 @@
 'use strict';
-var $__basics_47_amdmodule__;
-var amdMod = ($__basics_47_amdmodule__ = require('basics/amdmodule'), $__basics_47_amdmodule__ && $__basics_47_amdmodule__.__esModule && $__basics_47_amdmodule__ || { default: $__basics_47_amdmodule__ }).default;
-var $__default = {
-    amdModule: amdMod,
-    name: 'es6Module'
-};
-var __useDefault = true;
+function $__interopRequire(id) {
+    id = require(id);
+    return id && id.__esModule && id || { default: id };
+}
 Object.defineProperties(module.exports, {
+    __esModule: { value: true },
     default: {
+        enumerable: true,
         get: function () {
             return $__default;
         }
     },
     __useDefault: {
+        enumerable: true,
         get: function () {
             return __useDefault;
         }
-    },
-    __esModule: { value: true }
+    }
 });
+var amdMod = $__interopRequire('basics/amdmodule').default;
+var $__default = {
+    amdModule: amdMod,
+    name: 'es6Module'
+};
+var __useDefault = true;
