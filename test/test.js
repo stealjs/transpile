@@ -51,7 +51,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 			}
 
 			assert.equal(""+res, ""+resultData,"expected equals result");
-			done()
+			done();
 		});
 	});
 };
@@ -298,6 +298,15 @@ describe('es6 - amd', function(){
 	it("should work with babel", function(done){
 		doTranspile("es6", "es6", "es6_amd_babel.js","amd", {
 			transpiler: "babel"
+		}, done);
+	});
+
+	it("should work with babel-standalone included plugins", function(done) {
+		doTranspile("es6_with_decorators", "es6", "es6_decorators_amd_babel.js", "amd", {
+			transpiler: "babel",
+			babelOptions: {
+				plugins: ["transform-decorators-legacy"]
+			}
 		}, done);
 	});
 
