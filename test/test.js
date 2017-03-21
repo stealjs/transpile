@@ -301,6 +301,27 @@ describe('es6 - amd', function(){
 		}, done);
 	});
 
+	it("should work with babel-standalone included plugins", function(done) {
+		doTranspile("es6_and_decorators", "es6", "es6_decorators_amd_babel.js", "amd", {
+			transpiler: "babel",
+			babelOptions: {
+				plugins: ["transform-decorators-legacy"]
+			}
+		}, done);
+	});
+
+	it("should work with babel plugins NOT included in babel-standalone", function(done) {
+		doTranspile("es6", "es6", "es6_amd_babel_and_plugin.js", "amd", {
+			transpiler: "babel",
+			babelOptions: {
+				plugins: ["my-custom-plugin"],
+				customPlugins: {
+					"my-custom-plugin": require("./babel-plugin")
+				}
+			}
+		}, done);
+	});
+
 	it("should work with traceurOptions", function(done){
 		doTranspile("es6", "es6", "es_with_traceur_options.js", "amd", {
 			traceurOptions: {
