@@ -314,10 +314,7 @@ describe('es6 - amd', function(){
 		doTranspile("es6", "es6", "es6_amd_babel_and_plugin.js", "amd", {
 			transpiler: "babel",
 			babelOptions: {
-				plugins: ["my-custom-plugin"],
-				customPlugins: {
-					"my-custom-plugin": require("./babel-plugin")
-				}
+				plugins: [ require("./babel-plugin") ]
 			}
 		}, done);
 	});
