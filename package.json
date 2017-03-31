@@ -21,6 +21,7 @@
     "urix": "^0.1.0"
   },
   "devDependencies": {
+    "babel-preset-steal-test": "0.0.1",
     "chai": "*",
     "istanbul": "*",
     "mocha": "3.2.0",
