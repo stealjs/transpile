@@ -51,7 +51,7 @@ var convert = function(moduleName, converter, result, options, done, load){
 			}
 
 			assert.equal(""+res, ""+resultData,"expected equals result");
-			done()
+			done();
 		});
 	});
 };
@@ -318,6 +318,26 @@ describe('es6 - amd', function(){
 				customPlugins: {
 					"my-custom-plugin": require("./babel-plugin")
 				}
+			}
+		}, done);
+	});
+
+	it("should work with babel presets NOT built in babel-standalone", function(done) {
+		doTranspile("es6", "es6", "es6_amd_babel_and_plugin.js", "amd", {
+			transpiler: "babel",
+			babelOptions: {
+				presets: [ require("babel-preset-steal-test") ]
+			}
+		}, done);
+	});
+
+	it("presets override the default ones", function(done) {
+		doTranspile("es6", "es6", "es6_amd_babel_loose.js", "amd", {
+			transpiler: "babel",
+			babelOptions: {
+				presets: [
+					["es2015", {loose: true}]
+				]
 			}
 		}, done);
 	});
