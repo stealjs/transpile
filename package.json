@@ -26,6 +26,7 @@
     "eslint": "^3.19.0",
     "istanbul": "*",
     "mocha": "3.2.0",
+    "q": "^1.5.0",
     "xunit-file": "*"
   },
   "globalBrowser": {
@@ -61,7 +62,8 @@
       "no-param-reassign": "error"
     },
     "env": {
-      "node": true
+      "node": true,
+      "mocha": true
     }
   }
 }
