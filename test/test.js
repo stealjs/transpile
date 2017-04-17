@@ -11,7 +11,7 @@ var amd2cjs = require("../lib/amd_cjs");
 var steal2amd = require("../lib/steal_amd");
 var global2amd = require("../lib/global_amd");
 var amd2amd = require("../lib/amd_amd");
-var	cjs2amd = require("../lib/cjs_amd");
+var cjs2amd = require("../lib/cjs_amd");
 
 describe("es6 - cjs", function() {
 	it("should work", function() {
