@@ -18,19 +18,19 @@ var graph = {},
 
 for(var edge in transpilers) {
 	var types = edge.split("_");
-	
+
 	if(!graph[types[0]]) {
 		graph[types[0]] = {};
 	}
 	if(!graph[types[1]]) {
 		graph[types[1]] = {};
 	}
-	
+
 	graph[types[0]][types[1]] = graph[types[1]];
 }
 
 
-	
+
 var copyLoad = function(load){
 	var copy = {};
 	for(var prop in load){
@@ -57,7 +57,7 @@ var transpile = {
 	to: function(load, type, options){
 		var format = load.metadata.format || moduleType(load.source);
 		var path = this.able(format, type);
-		
+
 		if(!path) {
 			throw "transpile - unable to transpile "+format+" to "+type;
 		}
@@ -65,29 +65,29 @@ var transpile = {
 			// we are transpiling to ourselves.  Check for a transpiler
 			path.push(format);
 		}
-		
+
 		path.push(type);
-		
+
 		var copy = copyLoad(load);
 		var normalize = options.normalize;
 
-		options = options || {};
-		options.sourceMapFileName = sourceMapFileName(copy, options);
+		var transpileOptions = options || {};
+		transpileOptions.sourceMapFileName = sourceMapFileName(copy, options);
 
 		// Create the initial AST
 		if(format !== "es6") {
-			copy.ast = getAst(copy, options.sourceMapFileName);
+			copy.ast = getAst(copy, transpileOptions.sourceMapFileName);
 		}
 
 		var sourceContent = load.source;
-		
+
 		for(var i =0; i < path.length - 1; i++) {
-			var transpiler = transpilers[path[i]+"_"+path[i+1]] || toSelf;	
+			var transpiler = transpilers[path[i]+"_"+path[i+1]] || toSelf;
 			copy.ast = transpiler(copy, options);
-			// remove the normalize option after the first pass.  
-			delete options.normalize;
+			// remove the normalize option after the first pass.
+			delete transpileOptions.normalize;
 		}
-		options.normalize = normalize;
+		transpileOptions.normalize = normalize;
 		return generate(copy.ast, options, sourceContent);
 	},
 	able: function(from, to) {

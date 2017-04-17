@@ -23,6 +23,7 @@
   "devDependencies": {
     "babel-preset-steal-test": "0.0.1",
     "chai": "*",
+    "eslint": "^3.19.0",
     "istanbul": "*",
     "mocha": "3.2.0",
     "xunit-file": "*"
@@ -38,9 +39,10 @@
     }
   },
   "scripts": {
+    "eslint": "eslint lib/*.js, main.js",
     "mocha": "mocha test/*.js",
-    "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec",
-    "test-windows": "node_modules\\.bin\\mocha test\\*.js --reporter spec"
+    "test": "npm run eslint && ./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec",
+    "test-windows": "npm run eslint && node_modules\\.bin\\mocha test\\*.js --reporter spec"
   },
   "licenses": [
     {
@@ -52,5 +54,14 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/stealjs/transpile.git"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "rules": {
+      "no-param-reassign": "error"
+    },
+    "env": {
+      "node": true
+    }
   }
 }
