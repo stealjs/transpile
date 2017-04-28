@@ -12,6 +12,7 @@ var steal2amd = require("../lib/steal_amd");
 var global2amd = require("../lib/global_amd");
 var amd2amd = require("../lib/amd_amd");
 var cjs2amd = require("../lib/cjs_amd");
+var cjs2es6 = require("../lib/cjs_es6");
 
 describe("es6 - cjs", function() {
 	it("should work", function() {
@@ -473,6 +474,16 @@ describe("cjs - amd", function() {
 			sourceFileName: "cjs_global_dirname",
 			expectedFileName: "cjs_global_dirname"
 		});
+	});
+});
+
+describe("cjs - es6", function(){
+	it.only("converts when using module.exports", function(){
+		return convert({
+			converter: cjs2es6,
+			sourceFileName: "cjs-strict2",
+			expectedFileName: "cjs-strict2"
+		})
 	});
 });
 
