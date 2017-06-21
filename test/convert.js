@@ -14,26 +14,33 @@ module.exports = function convert(args) {
 	var sourceFileName = args.sourceFileName;
 	var expectedFileName = args.expectedFileName;
 
-	var actual;
 	var srcAddress = path.join(__dirname, "tests", sourceFileName + ".js");
 
 	return readFile(srcAddress)
 		.then(function(data) {
-			var load = assign({}, {
-				address: srcAddress,
-				name: sourceFileName,
-				source: data.toString()
-			}, args.load);
+			var load = assign(
+				{},
+				{
+					address: srcAddress,
+					name: sourceFileName,
+					source: data.toString()
+				},
+				args.load
+			);
 
 			return generate(converter(load, options)).code;
 		})
-		.then(function(res) {
-			actual = res;
-			return readFile(path.join(__dirname, "tests", "expected",
-				expectedFileName + ".js"));
+		.then(function(actual) {
+			return Promise.all([
+				actual,
+				readFile(
+					path.join(__dirname, "tests", "expected", expectedFileName + ".js")
+				)
+			]);
 		})
 		.then(function(data) {
-			var expected = data.toString();
+			var actual = data[0];
+			var expected = data[1].toString();
 
 			if (isWindows) {
 				actual = actual.replace(/[\n]/g, "");

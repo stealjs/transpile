@@ -92,4 +92,12 @@ describe("amd - slim", function() {
 			}
 		});
 	});
+
+	it("transpiles jquery-like IIFE/AMD", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_jquery",
+			expectedFileName: "amd_jquery_slim"
+		});
+	});
 });
