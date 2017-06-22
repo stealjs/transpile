@@ -108,4 +108,12 @@ describe("amd - slim", function() {
 			expectedFileName: "amd_require_exports_slim"
 		});
 	});
+
+	it("transpiles amd modules created by babel from ESM", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_babel",
+			expectedFileName: "amd_babel_slim"
+		});
+	});
 });
