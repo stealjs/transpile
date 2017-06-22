@@ -69,27 +69,11 @@ describe("amd - slim", function() {
 		});
 	});
 
-	it("dependencies needing normalize", function() {
+	it("transpile module.exports correctly", function() {
 		return convert({
 			converter: amdToSlim,
-			sourceFileName: "amd_needing_normalize",
-			expectedFileName: "amd_needing_normalize_slim",
-			options: {
-				normalize: function(name) {
-					var requiresPluginName = name.indexOf("!") != -1;
-					var endsWithSlash = name[name.length - 1] === "/";
-
-					if (endsWithSlash) {
-						var parts = name.split("/");
-						parts[parts.length - 1] = parts[parts.length - 2];
-						return parts.join("/");
-					} else if (requiresPluginName) {
-						return name.substr(name.indexOf("!") + 1);
-					}
-
-					return name;
-				}
-			}
+			sourceFileName: "amd_cjs_module",
+			expectedFileName: "amd_cjs_module_slim"
 		});
 	});
 
@@ -114,6 +98,30 @@ describe("amd - slim", function() {
 			converter: amdToSlim,
 			sourceFileName: "amd_babel",
 			expectedFileName: "amd_babel_slim"
+		});
+	});
+
+	it("dependencies needing normalize", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_needing_normalize",
+			expectedFileName: "amd_needing_normalize_slim",
+			options: {
+				normalize: function(name) {
+					var requiresPluginName = name.indexOf("!") != -1;
+					var endsWithSlash = name[name.length - 1] === "/";
+
+					if (endsWithSlash) {
+						var parts = name.split("/");
+						parts[parts.length - 1] = parts[parts.length - 2];
+						return parts.join("/");
+					} else if (requiresPluginName) {
+						return name.substr(name.indexOf("!") + 1);
+					}
+
+					return name;
+				}
+			}
 		});
 	});
 });
