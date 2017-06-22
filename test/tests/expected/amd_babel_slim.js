@@ -1,6 +1,6 @@
 [
     'amd_babel',
-    function (stealRequire, stealExports) {
+    function (stealRequire, stealExports, stealModule) {
         var _jquery = stealRequire('jquery');
         'use strict';
         Object.defineProperty(stealExports, '__esModule', { value: true });
