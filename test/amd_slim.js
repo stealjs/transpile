@@ -100,4 +100,12 @@ describe("amd - slim", function() {
 			expectedFileName: "amd_jquery_slim"
 		});
 	});
+
+	it("transpiles modules using CJS-like require and exports", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_require_exports",
+			expectedFileName: "amd_require_exports_slim"
+		});
+	});
 });
