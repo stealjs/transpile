@@ -1,0 +1,8 @@
+[
+    'amd_needing_normalize',
+    function (stealRequire, stealExports, stealModule) {
+        var stache = stealRequire('can/view/stache/');
+        stealRequire('!./tabs.less');
+        stealModule.exports = {};
+    }
+];
