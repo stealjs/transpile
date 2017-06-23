@@ -15,7 +15,8 @@ var transpilers = {
 	amd_amd: require("./lib/amd_amd"),
 	global_amd: require("./lib/global_amd"),
 	cjs_cjs: require("./lib/cjs_cjs"),
-	amd_slim: require("./lib/amd/slim")
+	amd_slim: require("./lib/amd/slim"),
+	global_slim: require("./lib/global/slim")
 };
 
 var formatsTransformsGraph = makeFormatsGraph(Object.keys(transpilers));
