@@ -26,7 +26,7 @@
   "devDependencies": {
     "babel-preset-steal-test": "0.0.1",
     "chai": "*",
-    "eslint": "^3.19.0",
+    "eslint": "^4.1.0",
     "istanbul": "*",
     "mocha": "3.2.0",
     "q": "^1.5.0",
