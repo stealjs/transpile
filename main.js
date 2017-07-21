@@ -31,6 +31,18 @@ function moduleType(source) {
 	return type && type !== "es" ? type : "es6";
 }
 
+/**
+ * Given the path of format transformations, checks if CJS -> AMD is the last step
+ * @param {Array.<String>} path - Path of format transformations
+ * @return {Boolean} true if CJS -> AMD is the last step
+ */
+function transformsCjsToAmd(path) {
+	var last = path[path.length - 1];
+	var prev = path[path.length - 2];
+
+	return prev === "cjs" && last === "amd";
+}
+
 // transpile.to
 var transpile = {
 	transpilers: transpilers,
@@ -58,6 +70,13 @@ var transpile = {
 		var transpileOptions = options || {};
 		transpileOptions.sourceMapFileName = sourceMapFileName(copy, options);
 
+		// will add the module dependencies using AMD's define dependencies array
+		// this ensure dependencies are loaded if the loaded misses the `require`
+		// calls in the AMD factory body.
+		if (transformsCjsToAmd(path)) {
+			transpileOptions.duplicateCjsDependencies = true;
+		}
+
 		// Create the initial AST
 		if (sourceFormat !== "es6") {
 			copy.ast = getAst(copy, transpileOptions.sourceMapFileName);
@@ -67,7 +86,7 @@ var transpile = {
 
 		for (var i = 0; i < path.length - 1; i++) {
 			var transpiler = transpilers[path[i] + "_" + path[i + 1]] || toSelf;
-			copy.ast = transpiler(copy, options);
+			copy.ast = transpiler(copy, transpileOptions);
 			// remove the normalize option after the first pass.
 			delete transpileOptions.normalize;
 		}
