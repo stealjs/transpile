@@ -11,7 +11,6 @@ var amd2cjs = require("../lib/amd_cjs");
 var steal2amd = require("../lib/steal_amd");
 var global2amd = require("../lib/global_amd");
 var amd2amd = require("../lib/amd_amd");
-var cjs2amd = require("../lib/cjs_amd");
 
 describe("es6 - cjs", function() {
 	it("should work", function() {
@@ -407,71 +406,6 @@ describe("es6 - amd", function() {
 					properTailCalls: true
 				}
 			}
-		});
-	});
-});
-
-describe("cjs - amd", function() {
-	it("should work with relative dependencies", function() {
-		var options = {
-			normalizeMap: {
-				'./b': 'b'
-			}
-		};
-
-		return convert({
-			options: options,
-			converter: cjs2amd,
-			sourceFileName: "cjs_deps",
-			expectedFileName: "cjs_deps"
-		});
-	});
-
-	it("should be able to add named defines", function() {
-		var options = {
-			normalizeMap: {
-				'./b': 'b'
-			},
-			namedDefines: true
-		};
-
-		return convert({
-			options: options,
-			converter: cjs2amd,
-			sourceFileName: "cjs_deps",
-			expectedFileName: "cjs_deps_named_defines"
-		});
-	});
-
-	it("converts a module that uses global", function() {
-		return convert({
-			converter: cjs2amd,
-			sourceFileName: "cjs_global",
-			expectedFileName: "cjs_global"
-		});
-	});
-
-	it("converts a module that uses global without dot operator", function() {
-		return convert({
-			converter: cjs2amd,
-			sourceFileName: "cjs_global_without_dot",
-			expectedFileName: "cjs_global_without_dot"
-		});
-	});
-
-	it("converts a module that uses __dirname", function() {
-		return convert({
-			converter: cjs2amd,
-			sourceFileName: "cjs_dirname",
-			expectedFileName: "cjs_dirname"
-		});
-	});
-
-	it("converts a module that uses global and __dirname", function() {
-		return convert({
-			converter: cjs2amd,
-			sourceFileName: "cjs_global_dirname",
-			expectedFileName: "cjs_global_dirname"
 		});
 	});
 });

@@ -3,10 +3,10 @@ define([
     'exports',
     'module',
     'a',
-    'b'
+    './b',
+    'c-c'
 ], function (require, exports, module) {
-    var a = require('a'), b = require('b');
+    var a = require('a'), b = require('./b'), c = require('c-c');
     exports.action = function () {
-        console.log(`hello world`);
     };
-}); //# sourceMappingURL=cjs_amd_sm.js.map
+});
