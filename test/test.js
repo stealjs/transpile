@@ -408,6 +408,17 @@ describe("es6 - amd", function() {
 			}
 		});
 	});
+
+	it("works with babel and circular dependencies", function() {
+		return doTranspile({
+			moduleFormat: "es6",
+			sourceFileName: "es6",
+			load: { circular: true },
+			resultModuleFormat: "amd",
+			options: { transpiler: "babel" },
+			expectedFileName: "es6_amd_babel_circular"
+		});
+	});
 });
 
 describe("normalize options", function() {
