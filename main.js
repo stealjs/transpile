@@ -1,7 +1,9 @@
 var bfs = require("./lib/bfs");
-var detect = require("js-module-formats").detect;
 var generate = require("./lib/generate");
 var getAst = require("./lib/get_ast");
+var partial = require("lodash/partial");
+var cloneDeep = require("lodash/cloneDeep");
+var detect = require("js-module-formats").detect;
 var sourceMapFileName = require("./lib/source_map_filename");
 var makeFormatsGraph = require("./lib/make_transforms_formats_graph.js");
 
@@ -32,16 +34,21 @@ function moduleType(source) {
 }
 
 /**
- * Given the path of format transformations, checks if CJS -> AMD is the last step
- * @param {Array.<String>} path - Path of format transformations
- * @return {Boolean} true if CJS -> AMD is the last step
+ * Whether the last step of the transform is from "source" to "dest"
+ * @param {string} source - The source code format
+ * @param {string} dest - The destination format
+ * @param {Array.<string>} path - Path of format transformations
+ * @return {Boolean} true if "source" -> "dest"  is the last step
  */
-function transformsCjsToAmd(path) {
-	var last = path[path.length - 1];
-	var prev = path[path.length - 2];
-
-	return prev === "cjs" && last === "amd";
+function endsWith(source, dest, path) {
+	return (
+		path[path.length - 2] === source &&
+		path[path.length - 1] === dest
+	);
 }
+
+var transformsCjsToAmd = partial(endsWith, "cjs", "amd");
+var transformsEs6ToAmd = partial(endsWith, "es6", "amd");
 
 // transpile.to
 var transpile = {
@@ -51,9 +58,10 @@ var transpile = {
 		var path = this.able(sourceFormat, destFormat);
 
 		if (!path) {
-			throw new Error(
-				`transpile - unable to transpile ${sourceFormat} to ${destFormat}`
-			);
+			throw new Error([
+				`Unable to transpile '${sourceFormat}' to '${destFormat}'`,
+				`'transpile' does not support '${sourceFormat}' to '${destFormat}' transformations`
+			].join("\n"));
 		}
 
 		// the source format and the dest format are the same, e.g: cjs_cjs
@@ -64,18 +72,13 @@ var transpile = {
 
 		path.push(destFormat);
 
-		var copy = Object.assign({}, load);
+		var copy = cloneDeep(load);
 		var normalize = options.normalize;
 
 		var transpileOptions = options || {};
-		transpileOptions.sourceMapFileName = sourceMapFileName(copy, options);
-
-		// will add the module dependencies using AMD's define dependencies array
-		// this ensure dependencies are loaded if the loaded misses the `require`
-		// calls in the AMD factory body.
-		if (transformsCjsToAmd(path)) {
-			transpileOptions.duplicateCjsDependencies = true;
-		}
+        transpileOptions.sourceMapFileName = sourceMapFileName(copy, options);
+		transpileOptions.duplicateCjsDependencies = transformsCjsToAmd(path);
+		transpileOptions.patchCircularDependencies = transformsEs6ToAmd(path);
 
 		// Create the initial AST
 		if (sourceFormat !== "es6") {
