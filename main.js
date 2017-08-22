@@ -2,7 +2,6 @@ var bfs = require("./lib/bfs");
 var generate = require("./lib/generate");
 var getAst = require("./lib/get_ast");
 var partial = require("lodash/partial");
-var cloneDeep = require("lodash/cloneDeep");
 var detect = require("js-module-formats").detect;
 var sourceMapFileName = require("./lib/source_map_filename");
 var makeFormatsGraph = require("./lib/make_transforms_formats_graph.js");
@@ -72,7 +71,7 @@ var transpile = {
 
 		path.push(destFormat);
 
-		var copy = cloneDeep(load);
+		var copy = Object.assign({}, load);
 		var normalize = options.normalize;
 
 		var transpileOptions = options || {};
