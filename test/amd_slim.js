@@ -124,4 +124,12 @@ describe("amd - slim", function() {
 			}
 		});
 	});
+
+	it("transpiles UMD modules", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_umd",
+			expectedFileName: "amd_umd_slim"
+		});
+	});
 });
