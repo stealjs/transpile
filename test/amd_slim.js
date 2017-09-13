@@ -111,10 +111,15 @@ describe("amd - slim", function() {
 					var requiresPluginName = name.indexOf("!") != -1;
 					var endsWithSlash = name[name.length - 1] === "/";
 
+					// duplicates the final part of module identifier
+					// foo/bar/ -> foo/bar/bar
 					if (endsWithSlash) {
 						var parts = name.split("/");
 						parts[parts.length - 1] = parts[parts.length - 2];
 						return parts.join("/");
+
+					// returns everything after the exclamation mark as the
+					// normalized module identifier
 					} else if (requiresPluginName) {
 						return name.substr(name.indexOf("!") + 1);
 					}
