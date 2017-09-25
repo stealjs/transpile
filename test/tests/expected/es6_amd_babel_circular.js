@@ -18,6 +18,7 @@ define([
     function _patchCircularDependency(obj) {
         var defaultExport;
         Object.defineProperty(obj.default, 'default', {
+            configurable: true,
             set: function (value) {
                 if (obj.default.__esModule) {
                     obj.default = value;
