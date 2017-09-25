@@ -2,7 +2,7 @@ var Q = require("q");
 var fs = require("fs");
 var path = require("path");
 var assert = require("assert");
-var assign = require("object.assign");
+var assign = require("lodash/assign");
 var generate = require("../lib/generate");
 
 var readFile = Q.denodeify(fs.readFile);

@@ -1,7 +1,7 @@
 var assert = require("assert");
 var transpile = require("../main");
 var convert = require("./convert");
-var assign = require("object.assign");
+var assign = require("lodash/assign");
 var doTranspile = require("./do-transpile");
 
 // converters
