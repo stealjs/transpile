@@ -137,4 +137,12 @@ describe("amd - slim", function() {
 			expectedFileName: "amd_umd_slim"
 		});
 	});
+
+	it("sets module.id when 'module' is a dependency", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_module",
+			expectedFileName: "amd_module_slim"
+		});
+	});
 });
