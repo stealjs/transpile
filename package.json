@@ -27,7 +27,7 @@
     "chai": "*",
     "eslint": "^4.1.0",
     "istanbul": "*",
-    "mocha": "3.5.0",
+    "mocha": "3.5.1",
     "q": "^1.5.0",
     "xunit-file": "*"
   },
