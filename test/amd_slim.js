@@ -137,4 +137,20 @@ describe("amd - slim", function() {
 			expectedFileName: "amd_umd_slim"
 		});
 	});
+
+	it("sets module.id when 'module' is a dependency", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_module_member_expression",
+			expectedFileName: "amd_module_member_expression_slim"
+		});
+	});
+
+	it("replaces 'module' identifiers with 'stealModule'", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_module_identifier",
+			expectedFileName: "amd_module_identifier_slim"
+		});
+	});
 });
