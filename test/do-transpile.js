@@ -4,6 +4,7 @@ var path = require("path");
 var assert = require("assert");
 var transpile = require("../main");
 var assign = require("lodash/assign");
+var isObject = require("lodash/isObject");
 
 var readFile = Q.denodeify(fs.readFile);
 var isWindows = /^win/.test(process.platform);
@@ -34,7 +35,12 @@ module.exports = function doTranspile(args) {
 		})
 		.then(function(res) {
 			actualCode = res.code;
-			actualMap = res.map && res.map.toString();
+
+			if (res.map && isObject(res.map)) {
+				actualMap = JSON.stringify(res.map);
+			} else if (res.map) {
+				actualMap = res.map.toString();
+			}
 
 			return readFile(
 				path.join(__dirname, "tests", "expected", expectedFileName + ".js")

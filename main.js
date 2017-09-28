@@ -1,4 +1,5 @@
 var bfs = require("./lib/bfs");
+var isEqual = require("lodash/isEqual");
 var generate = require("./lib/generate");
 var getAst = require("./lib/get_ast");
 var partial = require("lodash/partial");
@@ -84,16 +85,26 @@ var transpile = {
 			copy.ast = getAst(copy, transpileOptions.sourceMapFileName);
 		}
 
-		var sourceContent = load.source;
-
-		for (var i = 0; i < path.length - 1; i++) {
-			var transpiler = transpilers[path[i] + "_" + path[i + 1]] || toSelf;
+		var transpiler;
+		if (isEqual(path, ["es6", "amd"])) {
+			transpiler = require("./lib/es6_amd_recast");
 			copy.ast = transpiler(copy, transpileOptions);
-			// remove the normalize option after the first pass.
-			delete transpileOptions.normalize;
+		} else {
+			for (var i = 0; i < path.length - 1; i++) {
+				transpiler = transpilers[path[i] + "_" + path[i + 1]] || toSelf;
+				copy.ast = transpiler(copy, transpileOptions);
+				// remove the normalize option after the first pass.
+				delete transpileOptions.normalize;
+			}
 		}
+
 		transpileOptions.normalize = normalize;
-		return generate(copy.ast, options, sourceContent);
+
+		// the transpiled code with its ast and source map is
+		// already available on the load on direct es6 to amd transforms
+		return isEqual(path, ["es6", "amd"])
+			? { code: copy.source, ast: copy.ast, map: copy.map }
+			: generate(copy.ast, options, copy.source);
 	},
 	/**
 	 * Whether it's possible to transform the source format to the dest format

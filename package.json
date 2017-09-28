@@ -18,6 +18,8 @@
     "js-module-formats": "~0.1.2",
     "js-string-escape": "1.0.1",
     "lodash": "^4.17.4",
+    "recast": "^0.12.6",
+    "source-map": "^0.6.0",
     "sourcemap-to-ast": "0.0.2",
     "traceur": "0.0.111",
     "urix": "^0.1.0"
