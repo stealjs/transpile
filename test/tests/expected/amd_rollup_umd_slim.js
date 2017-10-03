@@ -1,5 +1,5 @@
 [
-    'amd_umd',
+    'amd_rollup_umd',
     function (stealRequire, stealExports, stealModule) {
         window.__defineNoConflict = window.define;
         window.define = function (name, deps, factory) {
@@ -20,19 +20,16 @@
             }
         };
         define.amd = true;
-        var _ = Object.create(null);
-        _.each = function () {
-        };
-        _.clone = function () {
-        };
-        if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
-            define(function () {
-                return _;
-            });
-        } else if (freeModule) {
-            (freeModule.exports = _)._ = _;
-            freeExports._ = _;
-        }
+        (function (global, factory) {
+            typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : factory(global.Kefir = global.Kefir || {});
+        }(this, function (exports) {
+            exports.sequentally = function () {
+            };
+            exports.filter = function () {
+            };
+            exports.map = function () {
+            };
+        }));
         window.define = __defineNoConflict;
         window.__defineNoConflict = undefined;
     }
