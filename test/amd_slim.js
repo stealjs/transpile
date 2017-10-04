@@ -153,4 +153,12 @@ describe("amd - slim", function() {
 			expectedFileName: "amd_module_identifier_slim"
 		});
 	});
+
+	it("transpiles UMD modules with 'export' dependency", function() {
+		return convert({
+			converter: amdToSlim,
+			sourceFileName: "amd_rollup_umd",
+			expectedFileName: "amd_rollup_umd_slim"
+		});
+	});
 });
