@@ -419,6 +419,16 @@ describe("es6 - amd", function() {
 			expectedFileName: "es6_amd_babel_circular"
 		});
 	});
+
+	it.only("does not change order of empty imports", function() {
+		return doTranspile({
+			moduleFormat: "es6",
+			resultModuleFormat: "amd",
+			options: { transpiler: "babel" },
+			sourceFileName: "es6_empty_import_first",
+			expectedFileName: "es6_empty_import_first_amd"
+		});
+	});
 });
 
 describe("normalize options", function() {

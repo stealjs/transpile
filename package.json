@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "ast-types": "^0.9.11",
-    "babel-standalone": "^6.23.1",
+    "babel-standalone": "^6.26.0",
     "comparify": "0.2.0",
     "escodegen": "^1.7.0",
     "esprima": "^4.0.0",
