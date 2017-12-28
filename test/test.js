@@ -185,7 +185,22 @@ describe("global - amd", function() {
 			load: load,
 			converter: global2amd,
 			sourceFileName: "global",
-			expectedFileName: "global_amd_init",
+			expectedFileName: "global_amd_init"
+		});
+	});
+
+	it("works with 'eval': 'script'", function() {
+		var load = {
+			metadata: {
+				format: "global",
+				eval: "script"
+			}
+		};
+		return convert({
+			load: load,
+			converter: global2amd,
+			sourceFileName: "global",
+			expectedFileName: "global_amd_eval"
 		});
 	});
 });
