@@ -52,7 +52,7 @@ var transformsEs6ToAmd = partial(endsWith, "es6", "amd");
 // transpile.to
 var transpile = {
 	transpilers: transpilers,
-	to: function(load, destFormat, options) {
+	to: function(load, destFormat, options = {}) {
 		var sourceFormat = load.metadata.format || moduleType(load.source);
 		var path = this.able(sourceFormat, destFormat);
 

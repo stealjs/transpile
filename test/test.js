@@ -21,6 +21,17 @@ describe("es6 - cjs", function() {
 		});
 	});
 
+	it("options argument is not required", function(){
+		var res = transpile.to({
+			name: "foo",
+			source: "var GoogleMapReact = require('google-map-react')",
+			metadata: { format: "es6" }
+		}, "cjs");
+
+		var e = "'use strict';\nvar GoogleMapReact = require('google-map-react');";
+		assert.equal(res.code, e);
+	})
+
 	it("works if global.System is something else (#14)", function() {
 		global.System = {};
 
