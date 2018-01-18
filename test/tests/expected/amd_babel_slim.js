@@ -1,5 +1,6 @@
 [
     'amd_babel',
+    /*amd_babel*/
     function (stealRequire, stealExports, stealModule) {
         var _jquery = stealRequire('jquery');
         'use strict';

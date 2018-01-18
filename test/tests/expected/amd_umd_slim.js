@@ -1,5 +1,6 @@
 [
     'amd_umd',
+    /*amd_umd*/
     function (stealRequire, stealExports, stealModule) {
         window.__defineNoConflict = window.define;
         window.define = function (name, deps, factory) {

@@ -1,5 +1,6 @@
 [
     'amd_jquery',
+    /*amd_jquery*/
     function (stealRequire, stealExports, stealModule) {
         window.__defineNoConflict = window.define;
         window.define = function (name, deps, factory) {
