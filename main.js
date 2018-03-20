@@ -47,7 +47,6 @@ function endsWith(source, dest, path) {
 }
 
 var transformsCjsToAmd = partial(endsWith, "cjs", "amd");
-var transformsEs6ToAmd = partial(endsWith, "es6", "amd");
 
 // transpile.to
 var transpile = {
@@ -78,7 +77,6 @@ var transpile = {
 		var transpileOptions = options || {};
         transpileOptions.sourceMapFileName = sourceMapFileName(copy, options);
 		transpileOptions.duplicateCjsDependencies = transformsCjsToAmd(path);
-		transpileOptions.patchCircularDependencies = transformsEs6ToAmd(path);
 
 		// Create the initial AST
 		if (sourceFormat !== "es6") {
