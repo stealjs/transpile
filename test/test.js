@@ -421,6 +421,23 @@ describe("es6 - amd", function() {
 		});
 	});
 
+	it("should not transpile code not part of provided plugins/presets", function() {
+		return doTranspile({
+			sourceFileName: "es_custom",
+			moduleFormat: "es6",
+			expectedFileName: "es_custom",
+			resultModuleFormat: "amd",
+			options: {
+				transpiler: "babel",
+				babelOptions: {
+					plugins: [
+						"transform-class-properties"
+					]
+				}
+			}
+		})
+	});
+
 	it("should work with traceurOptions", function() {
 		return doTranspile({
 			sourceFileName: "es6",
