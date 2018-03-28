@@ -3,7 +3,7 @@ define([
     'basics/amdmodule'
 ], function (exports, _amdmodule) {
     'use strict';
-    exports.__esModule = true;
+    Object.defineProperty(exports, '__esModule', { value: true });
     exports.__useDefault = undefined;
     var _amdmodule2 = _interopRequireDefault(_amdmodule);
     function _interopRequireDefault(obj) {

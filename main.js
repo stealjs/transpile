@@ -92,7 +92,16 @@ var transpile = {
 			delete transpileOptions.normalize;
 		}
 		transpileOptions.normalize = normalize;
-		return generate(copy.ast, options, sourceContent);
+		var result = generate(copy.ast, options, sourceContent);
+
+		// Generating over an existing source map can destroy it.
+		if(result.map && !result.map.toJSON().sources.length) {
+			result.map = copy.map;
+			if(!options.sourceMapsContent) {
+				delete result.map.sourcesContent;
+			}
+		}
+		return result;
 	},
 	/**
 	 * Whether it's possible to transform the source format to the dest format

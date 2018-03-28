@@ -1,1 +1,1 @@
-{"version":3,"sources":["es6.js"],"names":["amdModule","_amdmodule2","default","name","__useDefault","exports"],"mappings":";;;;;;;;;;;;QAGCA,SAAA,EAAAC,WAAA,CAAAC,O;QACAC,IAAA,EAAM,W;;IAGA,IAAIC,YAAA,GAAAC,OAAA,CAAAD,YAAA,GAAe,IAAnB,C","sourceRoot":"../"}
+{"version":3,"sources":["es6.js"],"names":["amdModule","name","__useDefault"],"mappings":";;;;;;;;;;;;;;;;mBAEe;AACdA,gCADc;AAEdC,QAAM;AAFQ,E;AAKR,KAAIC,sCAAe,IAAnB","file":"es6.js","sourceRoot":"../"}

@@ -34,7 +34,12 @@ module.exports = function doTranspile(args) {
 		})
 		.then(function(res) {
 			actualCode = res.code;
-			actualMap = res.map && res.map.toString();
+			if(res.map) {
+				actualMap = res.map.toString();
+				if(actualMap === "[object Object]") {
+					actualMap = JSON.stringify(res.map);
+				}
+			}
 
 			return readFile(
 				path.join(__dirname, "tests", "expected", expectedFileName + ".js")
