@@ -374,6 +374,21 @@ describe("es6 - amd", function() {
 		});
 	});
 
+	it("stage0 is not a required preset", function() {
+		return doTranspile({
+			moduleFormat: "es6",
+			resultModuleFormat: "amd",
+			sourceFileName: "es6_and_async",
+			expectedFileName: "es6_and_async",
+			options: {
+				transpiler: "babel",
+				babelOptions: {
+					presets: ["react"]
+				}
+			}
+		});
+	});
+
 	it("should work with babel plugins NOT included in babel-standalone", function() {
 		return doTranspile({
 			moduleFormat: "es6",
