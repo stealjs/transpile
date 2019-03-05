@@ -4,15 +4,16 @@ var path = require("path");
 var assert = require("assert");
 var assign = require("lodash/assign");
 var generate = require("../lib/generate");
+var defaults = require("lodash/defaults");
 
 var readFile = Q.denodeify(fs.readFile);
 var isWindows = /^win/.test(process.platform);
 
 module.exports = function convert(args) {
 	var converter = args.converter;
-	var options = args.options || {};
 	var sourceFileName = args.sourceFileName;
 	var expectedFileName = args.expectedFileName;
+	var options = defaults(args.options || {}, { forceES5: true });
 
 	var srcAddress = path.join(__dirname, "tests", sourceFileName + ".js");
 

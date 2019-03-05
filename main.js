@@ -2,6 +2,7 @@ var bfs = require("./lib/bfs");
 var generate = require("./lib/generate");
 var getAst = require("./lib/get_ast");
 var partial = require("lodash/partial");
+var defaults = require("lodash/defaults");
 var detect = require("js-module-formats").detect;
 var sourceMapFileName = require("./lib/source_map_filename");
 var makeFormatsGraph = require("./lib/make_transforms_formats_graph.js");
@@ -52,7 +53,7 @@ var transformsCjsToAmd = partial(endsWith, "cjs", "amd");
 var transpile = {
 	transpilers: transpilers,
 	to: function(load, destFormat, opts) {
-		var options = opts || {};
+		var options = defaults(opts || {}, { forceES5: true });
 		var sourceFormat = load.metadata.format || moduleType(load.source);
 		var path = this.able(sourceFormat, destFormat);
 

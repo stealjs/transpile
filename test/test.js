@@ -30,7 +30,7 @@ describe("es6 - cjs", function() {
 
 		var e = "'use strict';\nvar GoogleMapReact = require('google-map-react');";
 		assert.equal(res.code, e);
-	})
+	});
 
 	it("works if global.System is something else (#14)", function() {
 		global.System = {};
@@ -446,6 +446,19 @@ describe("es6 - amd", function() {
 				traceurOptions: {
 					properTailCalls: true
 				}
+			}
+		});
+	});
+
+	it("can skip es2015 transforms with options.forceES5", function() {
+		return doTranspile({
+			moduleFormat: "es6",
+			resultModuleFormat: "amd",
+			sourceFileName: "es6_and_async",
+			expectedFileName: "es6_and_async_not_es5",
+			options: {
+				transpiler: "babel",
+				forceES5: false
 			}
 		});
 	});
