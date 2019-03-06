@@ -306,6 +306,16 @@ describe("amd - amd", function() {
 			load: { name: "redefined" }
 		});
 	});
+
+	it("should not loop until the stack is out of space", function() {
+		return convert({
+			converter: amd2amd,
+			sourceFileName: "amd_umd_loop",
+			expectedFileName: "amd_umd_loop",
+			options: { namedDefines: true },
+			load: { name: "redefined" }
+		});
+	});
 });
 
 describe("metadata.format", function(){
