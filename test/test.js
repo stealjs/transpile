@@ -462,6 +462,22 @@ describe("es6 - amd", function() {
 			}
 		});
 	});
+
+	it("allows sourcemaps generation to be skipped", function() {
+		var es6ToAmd = require("../lib/es6_amd");
+
+		var load = {
+			source: "import foo from 'bar';",
+			name: "foo"
+		};
+
+		es6ToAmd(load, {
+			transpiler: "babel",
+			sourceMaps: false
+		});
+
+		assert.equal(load.map, null, "should not generate sourcemaps");
+	});
 });
 
 describe("normalize options", function() {
