@@ -4,3 +4,6 @@ node_js:
   - 8
   - node
 sudo: false
+dist: xenial
+services:
+  - xvfb
