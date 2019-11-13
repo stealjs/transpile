@@ -473,6 +473,19 @@ describe("es6 - amd", function() {
 		});
 	});
 
+	it("does not error with ES2015 features when not transforming to ES5", function() {
+		return doTranspile({
+			moduleFormat: "es6",
+			resultModuleFormat: "amd",
+			sourceFileName: "es6_string_literals",
+			expectedFileName: "es6_string_literals_not_es5",
+			options: {
+				transpiler: "babel",
+				forceES5: false
+			}
+		});
+	});
+
 	it("allows sourcemaps generation to be skipped", function() {
 		var es6ToAmd = require("../lib/es6_amd");
 
