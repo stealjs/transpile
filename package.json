@@ -27,7 +27,7 @@
     "babel-preset-steal-test": "0.0.1",
     "chai": "*",
     "coffee-script": "1.7.1",
-    "eslint": "^4.19.1",
+    "eslint": "^6.7.1",
     "istanbul": "*",
     "mocha": "4.0.0",
     "q": "^1.5.0",
