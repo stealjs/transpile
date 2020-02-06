@@ -11,7 +11,7 @@
     "ast-types": "^0.12.2",
     "babel-standalone": "^6.23.1",
     "comparify": "0.2.0",
-    "escodegen": "^1.7.0",
+    "escodegen": "1.13.0",
     "esprima": "^4.0.0",
     "estemplate": "^0.5.1",
     "estraverse": "4.2.0",
