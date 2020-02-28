@@ -29,7 +29,7 @@
     "coffee-script": "1.7.1",
     "eslint": "^4.19.1",
     "istanbul": "*",
-    "mocha": "4.0.0",
+    "mocha": "7.1.0",
     "q": "^1.5.0",
     "xunit-file": "*"
   },
