@@ -8,7 +8,7 @@
     "web": "http://bitovi.com/"
   },
   "dependencies": {
-    "ast-types": "^0.12.2",
+    "ast-types": "^0.13.3",
     "babel-standalone": "^6.23.1",
     "comparify": "0.2.0",
     "escodegen": "^1.7.0",
