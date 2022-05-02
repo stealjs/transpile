@@ -13,6 +13,7 @@
     "comparify": "0.2.0",
     "escodegen": "^1.7.0",
     "esprima": "^4.0.0",
+    "esprima-next": "^5.8.1",
     "estemplate": "^0.5.1",
     "estraverse": "4.2.0",
     "js-module-formats": "~0.1.2",
