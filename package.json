@@ -11,7 +11,7 @@
     "ast-types": "^0.15.2",
     "babel-standalone": "^6.23.1",
     "comparify": "0.2.0",
-    "escodegen": "^1.7.0",
+    "escodegen": "^2.0.0",
     "esprima": "^4.0.0",
     "esprima-next": "^5.8.1",
     "estemplate": "^0.5.1",
@@ -46,7 +46,7 @@
   },
   "scripts": {
     "eslint": "eslint lib/*.js, main.js",
-    "mocha": "mocha test/*.js",
+    "mocha": "mocha test/test.js",
     "test": "npm run eslint && ./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec",
     "test-windows": "npm run eslint && node_modules\\.bin\\mocha test\\*.js --reporter spec"
   },

@@ -34,22 +34,22 @@ module.exports = function doTranspile(args) {
 		})
 		.then(function(res) {
 			actualCode = res.code;
-			actualMap = res.map && res.map.toString();
+			actualMap = res.map && res.map.toString().trim();
 
 			return readFile(
 				path.join(__dirname, "tests", "expected", expectedFileName + ".js")
 			);
 		})
 		.then(function(data) {
-			var expected = data.toString();
+			var expected = data.toString().trim();
 
 			if (options.sourceMaps) {
 				actualCode += " //# sourceMappingURL=" + expectedFileName + ".js.map";
 			}
 
 			if (isWindows) {
-				expected = expected.replace(/[\n\r]/g, "");
-				actualCode = actualCode.replace(/[\n]/g, "");
+				expected = expected.replace(/(\\n)/g, "");
+				actualCode = actualCode.replace(/(\\r\\n)/g, "");
 			}
 
 			assert.equal(actualCode, expected, "expected equals result");
@@ -67,9 +67,13 @@ module.exports = function doTranspile(args) {
 		})
 		.then(function(expectedMap) {
 			if (expectedMap) {
+                if (isWindows) {
+                    expectedMap = expectedMap.toString().trim().replace(/(\\n)/g, "");
+                    actualMap = actualMap.replace(/(\\r\\n)/g, "");
+                }
 				assert.equal(
 					actualMap,
-					expectedMap.toString(),
+					expectedMap,
 					"expected map equals result"
 				);
 			}

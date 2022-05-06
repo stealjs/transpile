@@ -3,5 +3,5 @@ var a = require('a'),
 
 exports.action = function () {
 	console.log(`hello world`);
-	return import("foo.js");
+	return import("./a.js");
 };
