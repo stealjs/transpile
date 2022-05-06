@@ -15,7 +15,7 @@
     "esprima": "^4.0.0",
     "esprima-next": "^5.8.1",
     "estemplate": "^0.5.1",
-    "estraverse": "4.2.0",
+    "estraverse": "^5.3.0",
     "js-module-formats": "~0.1.2",
     "js-string-escape": "1.0.1",
     "lodash": "^4.17.4",
@@ -30,7 +30,7 @@
     "coffee-script": "1.7.1",
     "eslint": "^4.19.1",
     "istanbul": "*",
-    "mocha": "4.0.0",
+    "mocha": "^10.0.0",
     "q": "^1.5.0",
     "xunit-file": "*"
   },
@@ -46,7 +46,7 @@
   },
   "scripts": {
     "eslint": "eslint lib/*.js, main.js",
-    "mocha": "mocha test/test.js",
+    "mocha": "mocha test/*.js",
     "test": "npm run eslint && ./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec",
     "test-windows": "npm run eslint && node_modules\\.bin\\mocha test\\*.js --reporter spec"
   },

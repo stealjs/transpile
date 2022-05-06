@@ -5,6 +5,7 @@
         var a = stealRequire('a'), b = stealRequire('b');
         stealExports.action = function () {
             console.log(`hello world`);
+            return import('./a.js');
         };
     }
 ];

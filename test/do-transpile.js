@@ -48,8 +48,8 @@ module.exports = function doTranspile(args) {
 			}
 
 			if (isWindows) {
-				expected = expected.replace(/(\\n)/g, "");
-				actualCode = actualCode.replace(/(\\r\\n)/g, "");
+				expected = expected.replace(/[\r\n]/g, "");
+				actualCode = actualCode.replace(/[\n]/g, "");
 			}
 
 			assert.equal(actualCode, expected, "expected equals result");
@@ -69,7 +69,7 @@ module.exports = function doTranspile(args) {
 			if (expectedMap) {
                 if (isWindows) {
                     expectedMap = expectedMap.toString().trim().replace(/(\\n)/g, "");
-                    actualMap = actualMap.replace(/(\\r\\n)/g, "");
+                    actualMap = actualMap.replace(/(\\r\\n|\\n)/g, "");
                 }
 				assert.equal(
 					actualMap,

@@ -44,8 +44,8 @@ module.exports = function convert(args) {
 			var expected = data[1].toString().trim();
 
 			if (isWindows) {
-				actual = actual.replace(/(\\r\\n)/g, "");
-				expected = expected.replace(/(\\n)/g, "");
+				actual = actual.replace(/[\n]/g, "");
+				expected = expected.replace(/[\r\n]/g, "");
 			}
 
 			assert.equal(actual, expected, "expected equals result");
