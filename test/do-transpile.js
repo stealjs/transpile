@@ -67,8 +67,9 @@ module.exports = function doTranspile(args) {
 		})
 		.then(function(expectedMap) {
 			if (expectedMap) {
+                expectedMap = expectedMap.toString().trim();
                 if (isWindows) {
-                    expectedMap = expectedMap.toString().trim().replace(/(\\n)/g, "");
+                    expectedMap = expectedMap.replace(/(\\n)/g, "");
                     actualMap = actualMap.replace(/(\\r\\n|\\n)/g, "");
                 }
 				assert.equal(
