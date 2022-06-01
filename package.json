@@ -43,8 +43,8 @@
     }
   },
   "scripts": {
-    "eslint": "eslint lib/*.js, main.js",
-    "test": "mocha test/*.js",
+    "eslint": "eslint ./lib/*.js main.js",
+    "test": "npm run eslint && mocha test/*.js",
     "test-windows": "npm run eslint && node_modules\\.bin\\mocha test\\*.js --reporter spec"
   },
   "licenses": [
