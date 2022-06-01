@@ -40,14 +40,14 @@ module.exports = function convert(args) {
 			]);
 		})
 		.then(function(data) {
-			var actual = data[0];
-			var expected = data[1].toString();
+			var actual = data[0].trim();
+			var expected = data[1].toString().trim();
 
 			if (isWindows) {
 				actual = actual.replace(/[\n]/g, "");
-				expected = expected.replace(/[\n\r]/g, "");
+				expected = expected.replace(/[\r\n]/g, "");
 			}
 
-			assert.equal(actual, expected.toString(), "expected equals result");
+			assert.equal(actual, expected, "expected equals result");
 		});
 };

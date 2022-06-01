@@ -37,8 +37,8 @@ describe("cjs - amd - slim", function() {
 				// [ actual :: String, expected :: Buffer ]
 				.then(function(data) {
 					assert.equal(
-						data[0],
-						data[1].toString(),
+						data[0].trim(),
+						data[1].toString().trim(),
 						"transpiled output is incorrect"
 					);
 				})
