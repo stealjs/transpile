@@ -23,7 +23,7 @@
     "urix": "^0.1.0"
   },
   "devDependencies": {
-    "acorn": "~0.5.0",
+    "acorn": "~7.1.1",
     "babel-preset-steal-test": "0.0.1",
     "chai": "*",
     "coffee-script": "1.7.1",
